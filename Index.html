@@ -3,56 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StackRacks Empire - Ultimate CC Marketplace</title>
+  <title>Elite CC Vault - Est. 2015</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #f0f4f8, #d9e4f5); color: #333; transition: all 0.3s; overflow-x: hidden; }
-    .dark-mode { background: linear-gradient(135deg, #1a1a1a, #2c2c2c); color: #e0e0e0; }
-    .hero { background: linear-gradient(135deg, #0d6efd, #6610f2); padding: 150px 0; text-align: center; border-radius: 0 0 30px 30px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); }
-    .hero h1 { font-size: 3.5em; text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6); }
-    .hero p { font-size: 1.3em; opacity: 0.9; }
+    body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #0f0f0f, #1a1a2a); color: #d1d1d1; transition: all 0.3s; overflow-x: hidden; }
+    .hero { background: linear-gradient(135deg, #1a0033, #2a004d); padding: 150px 0; text-align: center; border-radius: 0 0 30px 30px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); position: relative; }
+    .hero h1 { font-size: 4em; text-shadow: 3px 3px 10px #000; font-weight: 700; }
+    .hero p { font-size: 1.4em; opacity: 0.85; text-transform: uppercase; letter-spacing: 2px; }
+    .hero::before { content: "Est. 2015"; position: absolute; top: 10px; left: 20px; font-size: 1.1em; color: #00ffcc; opacity: 0.7; }
     .product-grid { padding: 80px 0; }
     .card {
-      background: #fff;
-      border: none;
+      background: linear-gradient(135deg, #1e1e2e, #2a2a3a);
+      border: 1px solid #333;
       border-radius: 20px;
-      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.5);
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(40, 40, 50, 0.3);
       transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
     }
-    .dark-mode .card { background: #2a2a2a; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(40, 40, 40, 0.5); }
-    .card:hover { transform: scale(1.1); box-shadow: 10px 10px 25px rgba(0, 94, 162, 0.3); }
-    .card-title { color: #0d6efd; }
-    .card-text { color: #666; }
-    .dark-mode .card-title { color: #00d4ff; }
-    .dark-mode .card-text { color: #b0b0b0; }
-    .btn-primary { background: linear-gradient(45deg, #0d6efd, #6610f2); border: none; transition: all 0.3s; }
-    .btn-primary:hover { background: linear-gradient(45deg, #005cbf, #520dc2); transform: translateY(-3px); }
-    .cart { position: fixed; top: 20px; right: 20px; width: 350px; background: #fff; border-radius: 20px; padding: 15px; z-index: 1000; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); transition: opacity 0.3s; }
-    .dark-mode .cart { background: #2a2a2a; }
+    .card:hover { transform: scale(1.12); box-shadow: 10px 10px 30px rgba(0, 150, 255, 0.4); }
+    .card-title { color: #00ffcc; font-weight: 600; }
+    .card-text { color: #a0a0a0; font-size: 0.9em; }
+    .btn-primary { background: linear-gradient(45deg, #00cc99, #0099ff); border: none; transition: all 0.3s; text-transform: uppercase; font-weight: bold; }
+    .btn-primary:hover { background: linear-gradient(45deg, #00b380, #0066cc); transform: translateY(-3px); }
+    .cart { position: fixed; top: 20px; right: 20px; width: 350px; background: linear-gradient(135deg, #1e1e2e, #2a2a3a); border: 1px solid #333; border-radius: 20px; padding: 15px; z-index: 1000; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); transition: opacity 0.3s; }
     .cart.hidden { opacity: 0; pointer-events: none; }
-    .reviews { margin-top: 10px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-    .review-input { width: 100%; margin-top: 5px; padding: 8px; border-radius: 10px; border: 1px solid #0d6efd; background: rgba(255, 255, 255, 0.2); color: #333; transition: all 0.3s; }
-    .dark-mode .review-input { border-color: #00d4ff; background: rgba(0, 0, 0, 0.2); color: #e0e0e0; }
-    .review-input:focus { border-color: #00d4ff; box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
-    footer { background: #343a40; padding: 20px; text-align: center; border-radius: 30px 30px 0 0; box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3); }
-    .dark-mode footer { background: #1a1a1a; }
+    .reviews { margin-top: 10px; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; }
+    .review-input { width: 100%; margin-top: 5px; padding: 8px; border-radius: 10px; border: 1px solid #00ffcc; background: rgba(0, 0, 0, 0.5); color: #d1d1d1; transition: all 0.3s; }
+    .review-input:focus { border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
+    footer { background: #1a1a2a; padding: 20px; text-align: center; border-radius: 30px 30px 0 0; box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.6); }
     .search-bar { margin: 20px 0; position: relative; }
-    .search-bar input { width: 100%; padding: 12px 50px 12px 20px; border-radius: 25px; border: 2px solid #0d6efd; background: rgba(255, 255, 255, 0.1); color: #333; transition: all 0.3s; }
-    .dark-mode .search-bar input { border-color: #00d4ff; background: rgba(0, 0, 0, 0.1); color: #e0e0e0; }
+    .search-bar input { width: 100%; padding: 12px 50px 12px 20px; border-radius: 25px; border: 2px solid #00ffcc; background: rgba(0, 0, 0, 0.3); color: #d1d1d1; transition: all 0.3s; font-size: 1.1em; }
     .search-bar input:focus { border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
-    .search-bar::after { content: '🔍'; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #0d6efd; font-size: 1.2em; }
-    .dark-mode .search-bar::after { color: #00d4ff; }
-    .filter-section { margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; }
-    .dark-mode .filter-section { background: rgba(0, 0, 0, 0.1); }
-    .profile { position: fixed; top: 20px; left: 20px; background: #fff; padding: 10px; border-radius: 20px; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); }
-    .dark-mode .profile { background: #2a2a2a; }
+    .search-bar::after { content: '🔍'; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #00ffcc; font-size: 1.3em; }
+    .filter-section { margin: 20px 0; padding: 20px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; }
+    .filter-section h5 { color: #00ffcc; font-size: 1.5em; margin-bottom: 15px; }
+    .filter-section button { margin: 5px; padding: 10px 20px; font-size: 1.1em; }
+    .profile { position: fixed; top: 20px; left: 20px; background: linear-gradient(135deg, #1e1e2e, #2a2a3a); padding: 15px; border-radius: 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); }
     .carousel-inner { border-radius: 20px; overflow: hidden; }
     @media (max-width: 768px) {
       .hero { padding: 100px 0; }
       .hero h1 { font-size: 2.5em; }
       .cart { width: 90%; left: 5%; right: 5%; }
       .profile { left: 5px; top: 5px; }
+      .filter-section button { width: 100%; margin: 5px 0; }
     }
   </style>
 </head>
@@ -60,46 +54,46 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>StackRacks Empire</h1>
-      <p class="lead">The Ultimate Marketplace for CCs, Fullz, Crypto & More</p>
-      <button class="btn btn-light btn-lg" onclick="scrollToProducts()">Dive In</button>
+      <h1>Elite CC Vault</h1>
+      <p class="lead">Trusted Since 2015 - CCs Fullz Crypto & Tools</p>
+      <button class="btn btn-primary btn-lg" onclick="scrollToProducts()">Hit The Vault</button>
     </div>
   </section>
 
   <!-- User Profile -->
   <div class="profile" id="profile">
     <h6 id="userName">Guest</h6>
-    <p id="purchaseHistory">No purchases</p>
+    <p id="purchaseHistory">No Hits</p>
+    <button class="btn btn-sm btn-primary mt-2" onclick="login()">LogIn</button>
+    <button class="btn btn-sm btn-danger mt-2" onclick="logout()">LogOut</button>
   </div>
 
   <!-- Search & Filter -->
   <section class="container">
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search items..." oninput="searchProducts()">
+      <input type="text" id="searchInput" placeholder="Search Deals..." oninput="searchProducts()">
     </div>
     <div class="filter-section">
       <h5>Filters</h5>
-      <button class="btn btn-primary me-2" onclick="filterProducts('all')">All</button>
-      <button class="btn btn-primary me-2" onclick="filterProducts('cc')">CCs</button>
-      <button class="btn btn-primary me-2" onclick="filterProducts('gift')">Gift Cards</button>
-      <button class="btn btn-primary me-2" onclick="filterProducts('crypto')">Crypto Packs</button>
-      <button class="btn btn-primary me-2" onclick="filterProducts('fullz')">Fullz</button>
-      <button class="btn btn-primary me-2" onclick="filterProducts('tools')">Tools</button>
+      <button class="btn btn-primary" onclick="filterProducts('all')">ALL</button>
+      <button class="btn btn-primary" onclick="filterProducts('cc')">CCs</button>
+      <button class="btn btn-primary" onclick="filterProducts('gift')">Gift Cards</button>
+      <button class="btn btn-primary" onclick="filterProducts('crypto')">Crypto</button>
+      <button class="btn btn-primary" onclick="filterProducts('fullz')">Fullz</button>
+      <button class="btn btn-primary" onclick="filterProducts('tools')">Tools</button>
       <label>Price: <span id="priceValue">$10 - $500</span></label>
-      <input type="range" min="10" max="500" value="500" oninput="filterByPrice(this.value)">
+      <input type="range" id="priceRange" min="10" max="500" value="500" oninput="filterByPrice(this.value)">
       <label>Balance: <span id="balanceValue">$0 - $10000</span></label>
-      <input type="range" min="0" max="10000" value="10000" oninput="filterByBalance(this.value)">
+      <input type="range" id="balanceRange" min="0" max="10000" value="10000" oninput="filterByBalance(this.value)">
     </div>
   </section>
 
   <!-- Product Grid -->
   <section class="product-grid">
     <div class="container">
-      <h2 class="text-center mb-4">Latest Deals</h2>
+      <h2 class="text-center mb-4 text-white">Fresh Drops</h2>
       <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner" id="productGrid">
-          <!-- Dynamic products loaded via JS -->
-        </div>
+        <div class="carousel-inner" id="productGrid"></div>
         <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         </button>
@@ -114,56 +108,59 @@
   <div class="cart hidden" id="cart">
     <h5>Cart (<span id="cartCount">0</span>)</h5>
     <ul id="cartItems" class="list-unstyled"></ul>
-    <button class="btn btn-success w-100 mt-2" onclick="checkout()">Buy on Telegram</button>
-  </div>
-
-  <!-- Live Chat Mockup -->
-  <div id="chatWidget" style="position: fixed; bottom: 20px; right: 20px; width: 300px; background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); display: none;">
-    <h6>Live Chat</h6>
-    <p>Connect with @rakrunnin</p>
-    <button class="btn btn-primary btn-sm" onclick="toggleChat()">Toggle</button>
+    <button class="btn btn-success w-100 mt-2" onclick="checkout()">CashOut On Telegram</button>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 StackRacks Empire. DM @rakrunnin for support.</p>
+    <p>&copy; 2025 Elite CC Vault. Hit @rakrunnin For Biz</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Mock data
+    // Mock data with real BINs and comments
+    function generateBin(type) {
+      const bins = { visa: ['414720', '453998', '455689'], mastercard: ['510510', '533358', '545454'] };
+      const bin = bins[type][Math.floor(Math.random() * bins[type].length)];
+      return bin + Array(10).fill(0).map(() => Math.floor(Math.random() * 10)).join('').slice(0, 10);
+    }
+
     const products = {
       cc: Array(60).fill().map((_, i) => ({
-        id: i + 1, name: `Visa ${i % 5 === 0 ? 'Platinum' : i % 3 === 0 ? 'Gold' : 'Classic'}`, price: Math.floor(Math.random() * 490 + 10), type: 'cc', balance: Math.floor(Math.random() * 9500 + 500), desc: 'High limit CC', reviews: []
+        id: i + 1, name: `Visa ${i % 5 === 0 ? 'Platinum' : i % 3 === 0 ? 'Gold' : 'Classic'}`, price: Math.floor(Math.random() * 490 + 10), type: 'cc', balance: Math.floor(Math.random() * 9500 + 500), desc: 'Live CC', bin: generateBin('visa'), reviews: []
       })).concat(Array(60).fill().map((_, i) => ({
-        id: i + 61, name: `MasterCard ${i % 5 === 0 ? 'World' : i % 3 === 0 ? 'Elite' : 'Standard'}`, price: Math.floor(Math.random() * 490 + 10), type: 'cc', balance: Math.floor(Math.random() * 9500 + 500), desc: 'Cashout ready', reviews: []
+        id: i + 61, name: `MasterCard ${i % 5 === 0 ? 'World' : i % 3 === 0 ? 'Elite' : 'Standard'}`, price: Math.floor(Math.random() * 490 + 10), type: 'cc', balance: Math.floor(Math.random() * 9500 + 500), desc: 'Cashout Ready', bin: generateBin('mastercard'), reviews: []
       }))),
       gift: Array(50).fill().map((_, i) => ({
-        id: i + 121, name: `Amazon Gift Card $${(i % 5 + 1) * 100}`, price: Math.floor(Math.random() * 90 + 10), type: 'gift', balance: (i % 5 + 1) * 100, desc: 'Instant use', reviews: []
+        id: i + 121, name: `Amazon GiftCard $${(i % 5 + 1) * 100}`, price: Math.floor(Math.random() * 90 + 10), type: 'gift', balance: (i % 5 + 1) * 100, desc: 'Instant Use', reviews: []
       })).concat(Array(50).fill().map((_, i) => ({
-        id: i + 171, name: `Walmart Gift Card $${(i % 5 + 1) * 50}`, price: Math.floor(Math.random() * 90 + 10), type: 'gift', balance: (i % 5 + 1) * 50, desc: 'Shop anywhere', reviews: []
+        id: i + 171, name: `Walmart GiftCard $${(i % 5 + 1) * 50}`, price: Math.floor(Math.random() * 90 + 10), type: 'gift', balance: (i % 5 + 1) * 50, desc: 'Shop Anywhere', reviews: []
       }))),
       crypto: Array(40).fill().map((_, i) => ({
-        id: i + 221, name: `BTC Pack ${i % 3 + 1} mBTC`, price: Math.floor(Math.random() * 290 + 50), type: 'crypto', balance: (i % 3 + 1) * 1000, desc: 'Crypto wallet seed', reviews: []
+        id: i + 221, name: `BTC Pack ${i % 3 + 1}mBTC`, price: Math.floor(Math.random() * 290 + 50), type: 'crypto', balance: (i % 3 + 1) * 1000, desc: 'Crypto Seed', reviews: []
       })).concat(Array(40).fill().map((_, i) => ({
-        id: i + 261, name: `ETH Pack ${i % 3 + 1} mETH`, price: Math.floor(Math.random() * 290 + 50), type: 'crypto', balance: (i % 3 + 1) * 500, desc: 'Ethereum keys', reviews: []
+        id: i + 261, name: `ETH Pack ${i % 3 + 1}mETH`, price: Math.floor(Math.random() * 290 + 50), type: 'crypto', balance: (i % 3 + 1) * 500, desc: 'ETH Keys', reviews: []
       }))),
       fullz: Array(30).fill().map((_, i) => ({
-        id: i + 301, name: `Fullz Pack ${i + 1}`, price: Math.floor(Math.random() * 190 + 20), type: 'fullz', balance: 0, desc: 'SSN + ID', reviews: []
+        id: i + 301, name: `Fullz Pack ${i + 1}`, price: Math.floor(Math.random() * 190 + 20), type: 'fullz', balance: 0, desc: 'SSN+ID', reviews: []
       })),
       tools: Array(20).fill().map((_, i) => ({
-        id: i + 331, name: `Tool ${i + 1} (Keylogger)`, price: Math.floor(Math.random() * 390 + 50), type: 'tools', balance: 0, desc: 'Remote access', reviews: []
+        id: i + 331, name: `Keylogger ${i + 1}`, price: Math.floor(Math.random() * 390 + 50), type: 'tools', balance: 0, desc: 'Silent Capture', reviews: []
       })).concat(Array(20).fill().map((_, i) => ({
-        id: i + 351, name: `Tool ${i + 21} (RAT)`, price: Math.floor(Math.random() * 390 + 50), type: 'tools', balance: 0, desc: 'Device control', reviews: []
+        id: i + 351, name: `RAT ${i + 21}`, price: Math.floor(Math.random() * 390 + 50), type: 'tools', balance: 0, desc: 'Device Control', reviews: []
       })))
     };
 
-    const reviewPool = [
-      'Worked like a charm, cashed out $2000!', 'Visa hit Amazon, minor OTP issue but fixed.',
-      'Amex was elite, bought luxury goods no cap!', 'MasterCard failed once, second try green.',
-      'Fast delivery, used it for online shopping.', 'Gift card redeemed instantly, no issues!',
-      'BTC pack was smooth, transferred easily.', 'Fullz opened a bank account after tweaks.',
-      'Tool setup took time but worked great!', 'Crypto pack hit the wallet fast!'
+    const comments = [
+      'Worked gr8 cashed 2k quick', 'Visa hit amazn otp took sum time',
+      'Amex elite bought gucci no cap', 'Mastrcrd faild once 2nd try workd',
+      'Fast dlivery used it 2 shop online', 'Giftcrd redemed no probs',
+      'BTC pack smooth xfer', 'Fullz opend bank acc aftr tweak',
+      'Tool setup slow bt workd', 'Crypto pack hit wallet fast'
+    ];
+    const usernames = [
+      'DarkHakr69', 'CashKing21x', 'BitLordz7', 'FullzMastr', 'CryptoThug',
+      'VisaVandl', 'MastrCrakr', 'GiftGrabba', 'ToolzRulz', 'ShadowDlr'
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -171,12 +168,11 @@
     let currentUser = localStorage.getItem('currentUser') || null;
     let isCartVisible = false;
 
-    // Initialize random reviews
     function initReviews() {
       Object.values(products).flat().forEach(p => {
         const reviewCount = Math.floor(Math.random() * 4) + 1;
         for (let i = 0; i < reviewCount; i++) {
-          p.reviews.push({ text: reviewPool[Math.floor(Math.random() * reviewPool.length)], user: `User${Math.floor(Math.random() * 1000)}` });
+          p.reviews.push({ text: comments[Math.floor(Math.random() * comments.length)], user: usernames[Math.floor(Math.random() * usernames.length)] });
         }
       });
     }
@@ -201,19 +197,20 @@
             <div class="col-md-4 mb-4">
               <div class="card p-3">
                 <div class="card-body">
+                  <img src="${p.type === 'cc' ? 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg' : p.type === 'gift' ? 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg' : p.type === 'crypto' ? 'https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg' : p.type === 'fullz' ? 'https://img.icons8.com/ios-filled/50/00ffcc/user.png' : 'https://img.icons8.com/ios-filled/50/00ffcc/software.png'}" alt="${p.name}" style="width: 100px; height: auto; margin-bottom: 10px;">
                   <h5 class="card-title">${p.name}</h5>
-                  <p class="card-text">${p.desc} | ${p.balance ? `Balance: $${p.balance}` : 'N/A'}</p>
+                  <p class="card-text">${p.desc} | ${p.balance ? `Bal: $${p.balance}` : 'N/A'} | #${p.bin.slice(0, 6)}XXXX</p>
                   <p class="card-text fw-bold text-success">$${p.price}</p>
                   <div class="reviews">
                     ${p.reviews.map(r => `<small><i>${r.user}: ${r.text}</i></small><br>`).join('')}
-                    ${currentUser ? `<input type="text" class="review-input" id="review-${p.id}" placeholder="Add review...">
-                    <button class="btn btn-sm btn-info mt-1" onclick="addReview(${p.id})">Post</button>` : ''}
+                    ${currentUser ? `<input type="text" class="review-input" id="review-${p.id}" placeholder="Drop Comment...">
+                    <button class="btn btn-sm btn-primary mt-1" onclick="addReview(${p.id})">Post</button>` : ''}
                   </div>
                   <div class="input-group mt-2">
                     <button class="btn btn-secondary" onclick="adjustQuantity(${p.id}, -1)">-</button>
                     <input type="number" id="qty-${p.id}" class="form-control text-center" value="1" min="1" style="width: 60px;">
                     <button class="btn btn-secondary" onclick="adjustQuantity(${p.id}, 1)">+</button>
-                    <button class="btn btn-primary ms-2" onclick="addToCart(${p.id})">Add to Cart</button>
+                    <button class="btn btn-primary ms-2" onclick="addToCart(${p.id})">Add 2 Cart</button>
                   </div>
                 </div>
               </div>
@@ -228,9 +225,14 @@
       const product = Object.values(products).flat().find(p => p.id === id);
       const qty = parseInt(document.getElementById(`qty-${id}`).value);
       for (let i = 0; i < qty; i++) cart.push(product);
+      if (currentUser) {
+        users[currentUser].purchases = users[currentUser].purchases || [];
+        users[currentUser].purchases.push({ id: product.id, name: product.name, price: product.price, qty });
+      }
       localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('users', JSON.stringify(users));
       updateCart();
-      showPopup(`Added ${qty}x ${product.name} to cart!`);
+      showPopup(`Added ${qty}x ${product.name} 2 cart!`);
     }
 
     function adjustQuantity(id, delta) {
@@ -241,14 +243,14 @@
 
     function addReview(id) {
       const input = document.getElementById(`review-${id}`);
-      const review = input.value.trim();
+      const review = input.value.trim().toLowerCase();
       if (review && currentUser) {
         const product = Object.values(products).flat().find(p => p.id === id);
         product.reviews.push({ text: review, user: currentUser });
         input.value = '';
         renderProducts();
       } else if (!currentUser) {
-        showPopup('Login to review!');
+        showPopup('LogIn 2 Review!');
       }
     }
 
@@ -264,6 +266,7 @@
         return `<li>${product.name} x${qty} - $${product.price * qty} <button class="btn btn-sm btn-danger" onclick="removeFromCart(${id})">Remove</button></li>`;
       }).join('');
       document.getElementById('cart').className = `cart ${cart.length > 0 ? '' : 'hidden'}`;
+      if (currentUser) updateProfile();
     }
 
     function removeFromCart(id) {
@@ -293,11 +296,11 @@
 
     function checkout() {
       if (cart.length === 0) {
-        showPopup('Cart empty!');
+        showPopup('Cart Empty!');
         return;
       }
       const total = cart.reduce((sum, item) => sum + item.price, 0);
-      showPopup(`Redirecting to Telegram... Total: $${total}`);
+      showPopup(`Redirectin 2 Telegram Total $${total}`);
       setTimeout(() => window.open('https://t.me/rakrunnin', '_blank'), 1000);
     }
 
@@ -314,33 +317,27 @@
     }
 
     function login() {
-      const username = prompt('Enter username:');
-      if (username) {
-        if (!users[username]) users[username] = { purchases: [] };
-        currentUser = username;
-        localStorage.setItem('currentUser', username);
-        localStorage.setItem('users', JSON.stringify(users));
-        document.getElementById('userName').textContent = `User: ${username}`;
-        updateProfile();
-      }
+      const username = prompt('Enter UserName:').toLowerCase() || `User${Math.floor(Math.random() * 1000)}`;
+      if (!users[username]) users[username] = { purchases: [] };
+      currentUser = username;
+      localStorage.setItem('currentUser', username);
+      localStorage.setItem('users', JSON.stringify(users));
+      document.getElementById('userName').textContent = `User: ${username}`;
+      updateProfile();
     }
 
     function logout() {
       currentUser = null;
       localStorage.removeItem('currentUser');
       document.getElementById('userName').textContent = 'Guest';
-      document.getElementById('purchaseHistory').textContent = 'No purchases';
+      document.getElementById('purchaseHistory').textContent = 'No Hits';
     }
 
     function updateProfile() {
       if (currentUser) {
         const user = users[currentUser];
-        document.getElementById('purchaseHistory').textContent = `Purchases: ${user.purchases.length} items`;
+        document.getElementById('purchaseHistory').textContent = `Hits: ${user.purchases.length} items`;
       }
-    }
-
-    function toggleChat() {
-      document.getElementById('chatWidget').style.display = document.getElementById('chatWidget').style.display === 'block' ? 'none' : 'block';
     }
 
     // Dark mode toggle
@@ -349,7 +346,6 @@
     });
 
     // Initial load
-    document.getElementById('profile').innerHTML += '<button class="btn btn-sm btn-primary mt-2" onclick="login()">Login</button><button class="btn btn-sm btn-danger mt-2" onclick="logout()">Logout</button>';
     renderProducts();
     updateCart();
     updateProfile();
