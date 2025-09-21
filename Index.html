@@ -3,78 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shadow CC Dominion - Est. 2015</title>
+  <title>Ironclad CC Syndicate - Est. 2015 | IHG Rewards Specialist</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #1c2526, #2e3839); color: #d3d7d9; transition: all 0.3s; overflow-x: hidden; }
-    .hero { background: linear-gradient(135deg, #1a2223, #2a3334); padding: 150px 0; text-align: center; border-radius: 0 0 30px 30px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); position: relative; }
-    .hero h1 { font-size: 4em; text-shadow: 2px 2px 8px #000; font-weight: 700; }
-    .hero p { font-size: 1.4em; opacity: 0.85; text-transform: uppercase; letter-spacing: 2px; }
-    .hero::before { content: "Est. 2015"; position: absolute; top: 10px; left: 20px; font-size: 1.1em; color: #a9b4b7; opacity: 0.7; }
-    .product-grid { padding: 80px 0; }
-    .card {
-      background: #252d2e;
-      border: 1px solid #3a4546;
-      border-radius: 20px;
-      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6), -3px -3px 10px rgba(40, 50, 51, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-      overflow: hidden;
-    }
-    .card:hover { transform: scale(1.12); box-shadow: 10px 10px 30px rgba(0, 80, 100, 0.4); }
-    .card-title { color: #a9b4b7; font-weight: 600; }
-    .card-text { color: #8a9294; font-size: 0.9em; }
-    .btn-primary { background: linear-gradient(45deg, #4a6063, #6d878a); border: none; transition: all 0.3s; text-transform: uppercase; font-weight: bold; }
-    .btn-primary:hover { background: linear-gradient(45deg, #3a4f52, #5d7376); transform: translateY(-3px); }
-    .cart { position: fixed; top: 20px; right: 20px; width: 350px; background: #252d2e; border: 1px solid #3a4546; border-radius: 20px; padding: 15px; z-index: 1000; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6); transition: opacity 0.3s; }
+    body { background: linear-gradient(135deg, #1a1f21, #22282a); color: #c0c5c7; font-family: 'Roboto', sans-serif; margin: 0; overflow-x: hidden; }
+    .hero { background: linear-gradient(135deg, #13181a, #1c2123); padding: 150px 0; text-align: center; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9); position: relative; }
+    .hero h1 { font-size: 4.5em; text-shadow: 3px 3px 10px #000; font-weight: 800; }
+    .hero p { font-size: 1.4em; opacity: 0.85; text-transform: uppercase; letter-spacing: 3px; }
+    .hero::before { content: "Est. 2015 - IHG Rewards Pro"; position: absolute; top: 15px; left: 25px; font-size: 1.3em; color: #9ea4a7; opacity: 0.8; }
+    .product-grid { padding: 70px 0; }
+    .card { background: #252d2e; border: 2px solid #2f3537; border-radius: 18px; margin: 20px 0; transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+    .card:hover { transform: scale(1.1); box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.7); }
+    .card-title { color: #9ea4a7; font-weight: 700; }
+    .card-text { color: #7f8587; font-size: 1em; }
+    .btn-primary { background: linear-gradient(45deg, #3c4548, #4a5558); border: none; transition: all 0.3s; text-transform: uppercase; font-weight: bold; padding: 8px 15px; }
+    .btn-primary:hover { background: linear-gradient(45deg, #2f383a, #3d484b); transform: translateY(-2px); }
+    .cart { position: fixed; top: 20px; right: 20px; width: 340px; background: #252d2e; border: 2px solid #2f3537; padding: 15px; z-index: 1000; box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.7); transition: opacity 0.3s; }
     .cart.hidden { opacity: 0; pointer-events: none; }
-    .reviews { margin-top: 10px; padding: 10px; background: rgba(0, 0, 0, 0.4); border-radius: 10px; }
-    .review-input { width: 100%; margin-top: 5px; padding: 8px; border-radius: 10px; border: 1px solid #6d878a; background: rgba(0, 0, 0, 0.5); color: #d3d7d9; transition: all 0.3s; }
-    .review-input:focus { border-color: #5d7376; box-shadow: 0 0 15px rgba(93, 115, 118, 0.5); }
-    footer { background: #1c2526; padding: 20px; text-align: center; border-radius: 30px 30px 0 0; box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.7); }
-    .search-bar { margin: 20px 0; position: relative; }
-    .search-bar input { width: 100%; padding: 12px 50px 12px 20px; border-radius: 25px; border: 2px solid #6d878a; background: rgba(0, 0, 0, 0.3); color: #d3d7d9; transition: all 0.3s; font-size: 1.2em; }
-    .search-bar input:focus { border-color: #5d7376; box-shadow: 0 0 15px rgba(93, 115, 118, 0.5); }
-    .search-bar::after { content: '🔍'; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #6d878a; font-size: 1.3em; }
-    .filter-section { margin: 20px 0; padding: 20px; background: rgba(0, 0, 0, 0.5); border-radius: 20px; }
-    .filter-section h5 { color: #a9b4b7; font-size: 1.6em; margin-bottom: 15px; }
-    .filter-section button { margin: 5px; padding: 12px 25px; font-size: 1.2em; }
-    .profile { position: fixed; top: 20px; left: 20px; background: #252d2e; padding: 15px; border-radius: 20px; box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6); }
-    .carousel-inner { border-radius: 20px; overflow: hidden; }
-    .verified { color: #a9b4b7; font-size: 0.8em; }
-    .stars { color: #ffd700; font-size: 1em; }
+    .reviews { background: #1a1f21; padding: 10px; border-radius: 10px; max-height: 120px; overflow-y: auto; }
+    .review-input { width: 100%; margin-top: 5px; padding: 8px; border-radius: 6px; border: 1px solid #4a5558; background: rgba(0, 0, 0, 0.5); color: #c0c5c7; transition: all 0.3s; }
+    .review-input:focus { border-color: #3d484b; box-shadow: 0 0 12px rgba(61, 72, 75, 0.6); }
+    .filter-section { margin: 25px 0; padding: 20px; background: #252d2e; border-radius: 18px; }
+    .filter-section h5 { color: #9ea4a7; font-size: 1.7em; margin-bottom: 15px; }
+    .filter-section button { margin: 6px; padding: 12px 25px; font-size: 1.2em; }
+    .stats { background: #1c2123; padding: 12px; border-radius: 12px; margin: 25px 0; }
+    .profile { position: fixed; top: 20px; left: 20px; background: #252d2e; padding: 12px; border-radius: 18px; box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.7); }
+    .leaderboard { background: #1a1f21; padding: 10px; border-radius: 10px; margin: 20px 0; }
+    .drop-alert { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #3c4548; padding: 10px; border-radius: 5px; display: none; animation: pop 0.5s; z-index: 1001; }
+    @keyframes pop { 0% { transform: translateX(-50%) scale(0.8); } 50% { transform: translateX(-50%) scale(1.1); } 100% { transform: translateX(-50%) scale(1); } }
+    .chat-window { position: fixed; bottom: 20px; left: 20px; width: 300px; height: 400px; background: #252d2e; border: 2px solid #2f3537; border-radius: 18px; padding: 10px; z-index: 1001; display: none; }
+    .chat-messages { height: 300px; overflow-y: auto; background: #1a1f21; padding: 5px; border-radius: 8px; margin-bottom: 10px; }
+    .chat-input { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #4a5558; background: rgba(0, 0, 0, 0.5); color: #c0c5c7; }
+    .rank-badge { background: #3c4548; color: #9ea4a7; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; }
+    .auction { background: #1a1f21; padding: 10px; border-radius: 10px; margin: 10px 0; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(60, 69, 72, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(60, 69, 72, 0); } 100% { box-shadow: 0 0 0 0 rgba(60, 69, 72, 0); } }
     @media (max-width: 768px) {
       .hero { padding: 100px 0; }
-      .hero h1 { font-size: 2.5em; }
+      .hero h1 { font-size: 3em; }
       .cart { width: 90%; left: 5%; right: 5%; }
       .profile { left: 5px; top: 5px; }
       .filter-section button { width: 100%; margin: 5px 0; }
+      .chat-window { width: 90%; left: 5%; }
     }
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>Shadow CC Dominion</h1>
-      <p class="lead">Unrivaled CC Fullz Crypto & Tools Since 2015</p>
-      <button class="btn btn-primary btn-lg" onclick="scrollToProducts()">Enter Dominion</button>
+      <h1>Ironclad CC Syndicate</h1>
+      <p>Unrivaled Underground Empire Since 2015</p>
+      <button class="btn btn-primary btn-lg" onclick="scrollToProducts()">Enter The Syndicate</button>
     </div>
   </section>
 
-  <!-- User Profile -->
-  <div class="profile" id="profile">
-    <h6 id="userName">Guest</h6>
-    <p id="purchaseHistory">No Transactions</p>
-    <button class="btn btn-sm btn-primary mt-2" onclick="login()">Login</button>
-    <button class="btn btn-sm btn-danger mt-2" onclick="logout()">Logout</button>
-  </div>
-
-  <!-- Search & Filter -->
-  <section class="container">
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search Vault..." oninput="searchProducts()">
+  <div class="container">
+    <div class="profile" id="profile">
+      <h6 id="userName">Guest</h6>
+      <span id="userRank" class="rank-badge">Newbie</span>
+      <p id="purchaseHistory">No Transactions</p>
+      <button class="btn btn-sm btn-primary mt-1" onclick="login()">Login</button>
+      <button class="btn btn-sm btn-danger mt-1" onclick="logout()">Logout</button>
     </div>
+
     <div class="filter-section">
       <h5>Filters</h5>
       <button class="btn btn-primary" onclick="filterProducts('all')">ALL</button>
@@ -83,148 +74,155 @@
       <button class="btn btn-primary" onclick="filterProducts('crypto')">Crypto</button>
       <button class="btn btn-primary" onclick="filterProducts('fullz')">Fullz</button>
       <button class="btn btn-primary" onclick="filterProducts('tools')">Tools</button>
-      <label>Price: <span id="priceValue">$10 - $500</span></label>
-      <input type="range" id="priceRange" min="10" max="500" value="500" oninput="filterByPrice(this.value)">
-      <label>Balance: <span id="balanceValue">$0 - $10000</span></label>
-      <input type="range" id="balanceRange" min="0" max="10000" value="10000" oninput="filterByBalance(this.value)">
-      <button class="btn btn-primary mt-2" onclick="sortByRating()">Sort by Rating</button>
+      <button class="btn btn-secondary" onclick="toggleChat()">Chat w/ Support</button>
     </div>
-  </section>
 
-  <!-- Product Grid -->
-  <section class="product-grid">
-    <div class="container">
-      <h2 class="text-center mb-4">Latest Hauls</h2>
-      <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner" id="productGrid"></div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-      </div>
+    <div class="stats">
+      <p>Total Sales: <span id="totalSales">0</span> | Active Users: <span id="activeUsers">0</span> | Live Auctions: <span id="liveAuctions">0</span></p>
     </div>
-  </section>
 
-  <!-- Cart -->
+    <div class="leaderboard">
+      <h6>Top Voted Items</h6>
+      <ul id="leaderboard"></ul>
+    </div>
+
+    <div id="productGrid" class="product-grid"></div>
+  </div>
+
   <div class="cart hidden" id="cart">
     <h5>Cart (<span id="cartCount">0</span>)</h5>
-    <ul id="cartItems" class="list-unstyled"></ul>
+    <ul id="cartItems"></ul>
     <button class="btn btn-success w-100 mt-2" onclick="checkout()">Checkout rakrunnin</button>
   </div>
 
-  <!-- Footer -->
+  <div class="chat-window" id="chatWindow">
+    <h6>Support Chat - @rakrunnin</h6>
+    <div class="chat-messages" id="chatMessages"></div>
+    <input type="text" class="chat-input" id="chatInput" placeholder="Type message...">
+    <button class="btn btn-sm btn-primary w-100 mt-1" onclick="sendMessage()">Send</button>
+  </div>
+
+  <div class="drop-alert" id="dropAlert"></div>
+
   <footer>
-    <p>&copy; 2025 Shadow CC Dominion. Contact @rakrunnin or support@shadowccdominion.com</p>
+    <p>&copy; 2025 Ironclad CC Syndicate. Contact @rakrunnin or support@ironcladsyndicate.com | 24/7 Live Support</p>
   </footer>
+
+  <audio id="cartSound" src="https://www.soundjay.com/buttons/beep-01a.mp3" preload="auto"></audio>
+  <audio id="dropSound" src="https://www.soundjay.com/buttons/beep-02.mp3" preload="auto"></audio>
+  <audio id="auctionSound" src="https://www.soundjay.com/buttons/beep-03.mp3" preload="auto"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Mock data with real BINs and comments
-    function generateBin(type) {
-      const bins = { visa: ['414720', '453998', '455689'], mastercard: ['510510', '533358', '545454'] };
-      const bin = bins[type][Math.floor(Math.random() * bins[type].length)];
-      return bin + Array(10).fill(0).map(() => Math.floor(Math.random() * 10)).join('').slice(0, 10);
-    }
-
     const products = {
-      cc: Array(60).fill().map((_, i) => ({
-        id: i + 1, name: `Visa ${i % 5 === 0 ? 'Platinum' : i % 3 === 0 ? 'Gold' : 'Classic'}`, price: Math.floor(Math.random() * 490 + 10), type: 'cc', balance: Math.floor(Math.random() * 9500 + 500), desc: 'Live CC', bin: generateBin('visa'), reviews: [], rating: Math.random() * 4 + 1
-      })).concat(Array(60).fill().map((_, i) => ({
-        id: i + 61, name: `MasterCard ${i % 5 === 0 ? 'World' : i % 3 === 0 ? 'Elite' : 'Standard'}`, price: Math.floor(Math.random() * 490 + 10), type: 'cc', balance: Math.floor(Math.random() * 9500 + 500), desc: 'Cashout Ready', bin: generateBin('mastercard'), reviews: [], rating: Math.random() * 4 + 1
-      }))),
-      gift: Array(50).fill().map((_, i) => ({
-        id: i + 121, name: `Amazon GiftCard $${(i % 5 + 1) * 100}`, price: Math.floor(Math.random() * 90 + 10), type: 'gift', balance: (i % 5 + 1) * 100, desc: 'Instant Use', reviews: [], rating: Math.random() * 4 + 1
-      })).concat(Array(50).fill().map((_, i) => ({
-        id: i + 171, name: `Walmart GiftCard $${(i % 5 + 1) * 50}`, price: Math.floor(Math.random() * 90 + 10), type: 'gift', balance: (i % 5 + 1) * 50, desc: 'Shop Anywhere', reviews: [], rating: Math.random() * 4 + 1
-      }))),
-      crypto: Array(40).fill().map((_, i) => ({
-        id: i + 221, name: `BTC Pack ${i % 3 + 1}mBTC`, price: Math.floor(Math.random() * 290 + 50), type: 'crypto', balance: (i % 3 + 1) * 1000, desc: 'Crypto Seed', reviews: [], rating: Math.random() * 4 + 1
-      })).concat(Array(40).fill().map((_, i) => ({
-        id: i + 261, name: `ETH Pack ${i % 3 + 1}mETH`, price: Math.floor(Math.random() * 290 + 50), type: 'crypto', balance: (i % 3 + 1) * 500, desc: 'ETH Keys', reviews: [], rating: Math.random() * 4 + 1
-      }))),
-      fullz: Array(30).fill().map((_, i) => ({
-        id: i + 301, name: `Fullz Pack ${i + 1}`, price: Math.floor(Math.random() * 190 + 20), type: 'fullz', balance: 0, desc: 'SSN+ID', reviews: [], rating: Math.random() * 4 + 1
-      })),
-      tools: Array(20).fill().map((_, i) => ({
-        id: i + 331, name: `Keylogger ${i + 1}`, price: Math.floor(Math.random() * 390 + 50), type: 'tools', balance: 0, desc: 'Silent Capture', reviews: [], rating: Math.random() * 4 + 1
-      })).concat(Array(20).fill().map((_, i) => ({
-        id: i + 351, name: `RAT ${i + 21}`, price: Math.floor(Math.random() * 390 + 50), type: 'tools', balance: 0, desc: 'Device Control', reviews: [], rating: Math.random() * 4 + 1
-      })))
+      cc: Array(40).fill().map((_, i) => ({ id: i + 1, name: `Visa ${i % 3 === 0 ? 'Platinum' : i % 2 === 0 ? 'Gold' : 'Classic'}`, price: Math.floor(Math.random() * 400 + 30), type: 'cc', balance: Math.floor(Math.random() * 8000 + 1500), bin: '414720' + Math.random().toString().slice(2, 12), reviews: [], votes: 0, verified: Math.random() > 0.4, auctionActive: Math.random() > 0.7, currentBid: Math.floor(Math.random() * 100 + 50), auctionEnd: Date.now() + Math.random() * 60000 })),
+      gift: Array(30).fill().map((_, i) => ({ id: i + 31, name: `Amazon Gift $${(i % 4 + 1) * 100}`, price: Math.floor(Math.random() * 90 + 15), type: 'gift', balance: (i % 4 + 1) * 100, reviews: [], votes: 0, verified: Math.random() > 0.4, auctionActive: Math.random() > 0.7, currentBid: Math.floor(Math.random() * 50 + 10), auctionEnd: Date.now() + Math.random() * 60000 })),
+      crypto: Array(20).fill().map((_, i) => ({ id: i + 61, name: `BTC Pack ${i + 1}mBTC`, price: Math.floor(Math.random() * 300 + 70), type: 'crypto', balance: (i + 1) * 700, reviews: [], votes: 0, verified: Math.random() > 0.4, auctionActive: Math.random() > 0.7, currentBid: Math.floor(Math.random() * 200 + 50), auctionEnd: Date.now() + Math.random() * 60000 })),
+      fullz: Array(20).fill().map((_, i) => ({ id: i + 81, name: `Fullz Pack ${i + 1}`, price: Math.floor(Math.random() * 200 + 40), type: 'fullz', balance: 0, reviews: [], votes: 0, verified: Math.random() > 0.4, auctionActive: Math.random() > 0.7, currentBid: Math.floor(Math.random() * 100 + 20), auctionEnd: Date.now() + Math.random() * 60000 })),
+      tools: Array(20).fill().map((_, i) => ({ id: i + 101, name: `Keylogger ${i + 1}`, price: Math.floor(Math.random() * 400 + 60), type: 'tools', balance: 0, reviews: [], votes: 0, verified: Math.random() > 0.4, auctionActive: Math.random() > 0.7, currentBid: Math.floor(Math.random() * 150 + 30), auctionEnd: Date.now() + Math.random() * 60000 }))
     };
-
-    const comments = [
-      'worked gr8 cashed 2k quick', 'visa hit amazn otp took sum time',
-      'amex elite bought gucci no cap', 'mastrcrd faild once 2nd try workd',
-      'fast dlivery used it 2 shop online', 'giftcrd redemed no probs',
-      'btc pack smooth xfer', 'fullz opend bank acc aftr tweak',
-      'tool setup slow bt workd', 'crypto pack hit wallet fast'
-    ];
-    const usernames = [
-      'DarkHakr69', 'CashKing21x', 'BitLordz7', 'FullzMastr', 'CryptoThug',
-      'VisaVandl', 'MastrCrakr', 'GiftGrabba', 'ToolzRulz', 'ShadowDlr'
-    ];
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let users = JSON.parse(localStorage.getItem('users')) || {};
     let currentUser = localStorage.getItem('currentUser') || null;
-    let isCartVisible = false;
+    let totalSales = 0;
+    let activeUsers = new Set();
+    let auctions = [];
 
-    function initReviews() {
-      Object.values(products).flat().forEach(p => {
-        const reviewCount = Math.floor(Math.random() * 4) + 1;
-        for (let i = 0; i < reviewCount; i++) {
-          p.reviews.push({ text: comments[Math.floor(Math.random() * comments.length)], user: usernames[Math.floor(Math.random() * usernames.length)], verified: Math.random() > 0.3 });
-        }
-      });
+    function getRank(purchases) {
+      if (purchases.length < 5) return 'Newbie';
+      if (purchases.length < 20) return 'Soldier';
+      return 'Boss';
     }
 
-    initReviews();
-
-    function renderProducts(filter = 'all', search = '', priceMax = 500, balanceMax = 10000, sortBy = 'none') {
+    function renderProducts(filter = 'all') {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-      let allProducts = Object.values(products).flat();
-      let filtered = allProducts.filter(p =>
-        (filter === 'all' || p.type === filter) &&
-        (search === '' || p.name.toLowerCase().includes(search.toLowerCase())) &&
-        p.price <= priceMax &&
-        (p.balance === 0 || p.balance <= balanceMax)
-      );
-      if (sortBy === 'rating') filtered.sort((a, b) => b.rating - a.rating);
-      filtered.forEach((product, i) => {
-        if (i % 3 === 0) {
-          const item = document.createElement('div');
-          item.className = 'carousel-item' + (i === 0 ? ' active' : '');
-          item.innerHTML = `<div class="row">${filtered.slice(i, i + 3).map(p => `
-            <div class="col-md-4 mb-4">
-              <div class="card p-3">
-                <div class="card-body">
-                  <img src="${p.type === 'cc' ? 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg' : p.type === 'gift' ? 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg' : p.type === 'crypto' ? 'https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg' : p.type === 'fullz' ? 'https://img.icons8.com/ios-filled/50/a9b4b7/user.png' : 'https://img.icons8.com/ios-filled/50/a9b4b7/software.png'}" alt="${p.name}" style="width: 100px; height: auto; margin-bottom: 10px;">
-                  <h5 class="card-title">${p.name}</h5>
-                  <p class="card-text">${p.desc} | ${p.balance ? `Bal: $${p.balance}` : 'N/A'} | #${p.bin.slice(0, 6)}XXXX</p>
-                  <p class="card-text fw-bold text-success">$${p.price}</p>
-                  <div class="stars">${'★'.repeat(Math.floor(p.rating))}${p.rating % 1 ? '☆' : ''} ${p.rating.toFixed(1)}</div>
-                  <div class="reviews">
-                    ${p.reviews.map(r => `<small><i>${r.user}${r.verified ? ' <span class="verified">[Verified]</span>' : ''}: ${r.text}</i></small><br>`).join('')}
-                    ${currentUser ? `<input type="text" class="review-input" id="review-${p.id}" placeholder="Drop Comment...">
-                    <button class="btn btn-sm btn-primary mt-1" onclick="addReview(${p.id})">Post</button>` : ''}
-                  </div>
-                  <div class="input-group mt-2">
-                    <button class="btn btn-secondary" onclick="adjustQuantity(${p.id}, -1)">-</button>
-                    <input type="number" id="qty-${p.id}" class="form-control text-center" value="1" min="1" style="width: 60px;">
-                    <button class="btn btn-secondary" onclick="adjustQuantity(${p.id}, 1)">+</button>
-                    <button class="btn btn-primary ms-2" onclick="addToCart(${p.id})">Add 2 Cart</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `).join('')}</div>`;
-          grid.appendChild(item);
+      const filtered = Object.values(products).flat().filter(p => filter === 'all' || p.type === filter);
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card p-3';
+        const rank = getRank(currentUser ? users[currentUser].purchases : []);
+        const rankBadge = rank === 'Boss' ? '<span class="rank-badge" style="background: #4a5558;">Boss</span>' : rank === 'Soldier' ? '<span class="rank-badge" style="background: #3c4548;">Soldier</span>' : '<span class="rank-badge" style="background: #2f3537;">Newbie</span>';
+        const auctionInfo = p.auctionActive ? `<div class="auction">Live Auction! Current Bid: $${p.currentBid} <button class="btn btn-sm btn-success" onclick="bid(${p.id}, ${p.currentBid + 10})">Bid +$10</button> <small>Ends: ${new Date(p.auctionEnd).toLocaleTimeString()}</small></div>` : '';
+        card.innerHTML = `
+          <h5 class="card-title">${p.name} ${p.verified ? '<span style="color: #9ea4a7;">[Verified]</span>' : ''}</h5>
+          <p class="card-text">${p.desc || p.type} | ${p.balance ? `Bal: $${p.balance}` : 'N/A'} | #${p.bin.slice(0, 6)}XXXX</p>
+          <p class="card-text fw-bold text-success">$${p.price}</p>
+          ${auctionInfo}
+          <div class="reviews" id="reviews-${p.id}"></div>
+          ${currentUser ? `<input type="text" class="review-input" id="review-${p.id}" placeholder="Drop Comment...">
+          <button class="btn btn-sm btn-primary mt-1" onclick="addReview(${p.id})">Post</button>` : ''}
+          <div class="mt-1">
+            <button class="btn btn-secondary" onclick="vote(${p.id}, 1)">👍 ${p.votes}</button>
+            <button class="btn btn-secondary" onclick="vote(${p.id}, -1)">👎</button>
+          </div>
+          <div class="input-group mt-1">
+            <button class="btn btn-secondary" onclick="adjustQuantity(${p.id}, -1)">-</button>
+            <input type="number" id="qty-${p.id}" class="form-control text-center" value="1" min="1" style="width: 50px;">
+            <button class="btn btn-secondary" onclick="adjustQuantity(${p.id}, 1)">+</button>
+            <button class="btn btn-primary ms-1" onclick="addToCart(${p.id})">Add</button>
+          </div>
+        `;
+        grid.appendChild(card);
+        updateReviews(p.id);
+      });
+      updateLeaderboard();
+      updateAuctions();
+    }
+
+    function addReview(id) {
+      if (!currentUser) { showPopup('Login to comment!'); return; }
+      const input = document.getElementById(`review-${id}`);
+      const text = input.value.trim();
+      if (text) {
+        const product = Object.values(products).flat().find(p => p.id === id);
+        product.reviews.push({ text, user: currentUser, time: new Date().toLocaleTimeString(), moderated: Math.random() > 0.15 });
+        input.value = '';
+        updateReviews(id);
+        updateAllReviews();
+        showPopup('Comment posted!');
+      }
+    }
+
+    function updateReviews(id) {
+      const reviewsDiv = document.getElementById(`reviews-${id}`);
+      const product = Object.values(products).flat().find(p => p.id === id);
+      reviewsDiv.innerHTML = product.reviews.filter(r => r.moderated).map(r => `<small><i>${r.user} @ ${r.time}: ${r.text}</i></small><br>`).join('');
+    }
+
+    function updateAllReviews() {
+      Object.values(products).flat().forEach(p => updateReviews(p.id));
+    }
+
+    function vote(id, delta) {
+      const product = Object.values(products).flat().find(p => p.id === id);
+      product.votes += delta;
+      renderProducts();
+      updateLeaderboard();
+      showPopup(delta > 0 ? 'Upvoted!' : 'Downvoted!');
+    }
+
+    function bid(id, amount) {
+      const product = Object.values(products).flat().find(p => p.id === id);
+      if (p.auctionActive && amount > p.currentBid) {
+        p.currentBid = amount;
+        p.auctionEnd = Date.now() + 60000;
+        document.getElementById('auctionSound').play();
+        showPopup(`Bid accepted! New high: $${amount}`);
+        updateAuctions();
+      }
+    }
+
+    function updateAuctions() {
+      auctions = Object.values(products).flat().filter(p => p.auctionActive && p.auctionEnd > Date.now());
+      document.getElementById('liveAuctions').textContent = auctions.length;
+      auctions.forEach(p => {
+        if (p.auctionEnd <= Date.now()) {
+          p.auctionActive = false;
+          showPopup(`Auction ended for ${p.name}! Sold for $${p.currentBid}`);
         }
       });
-      setTimeout(() => renderProducts(filter, search, priceMax, balanceMax, sortBy), 10000); // Live updates
     }
 
     function addToCart(id) {
@@ -233,31 +231,24 @@
       for (let i = 0; i < qty; i++) cart.push(product);
       if (currentUser) {
         users[currentUser].purchases = users[currentUser].purchases || [];
-        users[currentUser].purchases.push({ id: product.id, name: product.name, price: product.price, qty });
+        users[currentUser].purchases.push({ id, name: product.name, price: product.price, qty });
+        totalSales += product.price * qty;
+        users[currentUser].rank = getRank(users[currentUser].purchases);
       }
+      activeUsers.add(currentUser || 'Guest');
       localStorage.setItem('cart', JSON.stringify(cart));
       localStorage.setItem('users', JSON.stringify(users));
       updateCart();
-      showPopup(`Added ${qty}x ${product.name} 2 cart!`);
+      document.getElementById('cartSound').play();
+      showPopup(`Added ${qty}x ${product.name}!`);
+      updateStats();
+      updateProfile();
     }
 
     function adjustQuantity(id, delta) {
       const input = document.getElementById(`qty-${id}`);
       let qty = parseInt(input.value) + delta;
       input.value = Math.max(1, qty);
-    }
-
-    function addReview(id) {
-      const input = document.getElementById(`review-${id}`);
-      const review = input.value.trim().toLowerCase();
-      if (review && currentUser) {
-        const product = Object.values(products).flat().find(p => p.id === id);
-        product.reviews.push({ text: review, user: currentUser, verified: Math.random() > 0.3 });
-        input.value = '';
-        renderProducts();
-      } else if (!currentUser) {
-        showPopup('Login 2 Review!');
-      }
     }
 
     function updateCart() {
@@ -272,7 +263,6 @@
         return `<li>${product.name} x${qty} - $${product.price * qty} <button class="btn btn-sm btn-danger" onclick="removeFromCart(${id})">Remove</button></li>`;
       }).join('');
       document.getElementById('cart').className = `cart ${cart.length > 0 ? '' : 'hidden'}`;
-      if (currentUser) updateProfile();
     }
 
     function removeFromCart(id) {
@@ -282,80 +272,130 @@
     }
 
     function filterProducts(type) {
-      renderProducts(type, document.getElementById('searchInput').value, parseInt(document.getElementById('priceRange').value), parseInt(document.getElementById('balanceRange').value), 'none');
-    }
-
-    function searchProducts() {
-      const search = document.getElementById('searchInput').value;
-      renderProducts('all', search, parseInt(document.getElementById('priceRange').value), parseInt(document.getElementById('balanceRange').value), 'none');
-    }
-
-    function filterByPrice(value) {
-      document.getElementById('priceValue').textContent = `$10 - $${value}`;
-      renderProducts('all', document.getElementById('searchInput').value, value, parseInt(document.getElementById('balanceRange').value), 'none');
-    }
-
-    function filterByBalance(value) {
-      document.getElementById('balanceValue').textContent = `$0 - $${value}`;
-      renderProducts('all', document.getElementById('searchInput').value, parseInt(document.getElementById('priceRange').value), value, 'none');
-    }
-
-    function sortByRating() {
-      renderProducts('all', document.getElementById('searchInput').value, parseInt(document.getElementById('priceRange').value), parseInt(document.getElementById('balanceRange').value), 'rating');
+      renderProducts(type);
     }
 
     function checkout() {
-      if (cart.length === 0) {
-        showPopup('Cart Empty!');
-        return;
-      }
+      if (cart.length === 0) { showPopup('Cart empty!'); return; }
       const total = cart.reduce((sum, item) => sum + item.price, 0);
-      showPopup(`Redirectin 2 rakrunnin Total $${total}`);
+      showPopup(`Redirecting to rakrunnin - Total: $${total}`);
       setTimeout(() => window.open('https://t.me/rakrunnin', '_blank'), 1000);
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
     }
 
     function scrollToProducts() {
       document.querySelector('.product-grid').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function showPopup(message) {
+    function showPopup(msg) {
       const popup = document.createElement('div');
       popup.className = 'position-fixed bottom-0 end-0 m-3 p-2 bg-primary text-white rounded shadow';
-      popup.textContent = message;
+      popup.textContent = msg;
       document.body.appendChild(popup);
       setTimeout(() => popup.remove(), 3000);
     }
 
     function login() {
-      const username = prompt('Enter UserName:').toLowerCase() || `User${Math.floor(Math.random() * 1000)}`;
-      if (!users[username]) users[username] = { purchases: [] };
+      const username = prompt('UserName:') || `User${Math.random().toString(36).substr(2, 5)}`;
+      if (!users[username]) users[username] = { purchases: [], joined: new Date().toLocaleDateString(), rank: 'Newbie' };
       currentUser = username;
       localStorage.setItem('currentUser', username);
       localStorage.setItem('users', JSON.stringify(users));
       document.getElementById('userName').textContent = `User: ${username}`;
       updateProfile();
+      activeUsers.add(username);
+      updateStats();
     }
 
     function logout() {
       currentUser = null;
       localStorage.removeItem('currentUser');
       document.getElementById('userName').textContent = 'Guest';
+      document.getElementById('userRank').innerHTML = '<span class="rank-badge" style="background: #2f3537;">Newbie</span>';
       document.getElementById('purchaseHistory').textContent = 'No Transactions';
     }
 
     function updateProfile() {
       if (currentUser) {
         const user = users[currentUser];
-        document.getElementById('purchaseHistory').textContent = `Transactions: ${user.purchases.length} items`;
+        document.getElementById('userRank').innerHTML = `<span class="rank-badge" style="background: ${getRank(user.purchases) === 'Boss' ? '#4a5558' : getRank(user.purchases) === 'Soldier' ? '#3c4548' : '#2f3537'};">${getRank(user.purchases)}</span>`;
+        document.getElementById('purchaseHistory').textContent = `Transactions: ${user.purchases.length} | Joined: ${user.joined}`;
       }
+    }
+
+    function getRank(purchases) {
+      if (purchases.length < 5) return 'Newbie';
+      if (purchases.length < 20) return 'Soldier';
+      return 'Boss';
+    }
+
+    function updateStats() {
+      document.getElementById('totalSales').textContent = totalSales.toLocaleString();
+      document.getElementById('activeUsers').textContent = activeUsers.size;
+    }
+
+    function updateLeaderboard() {
+      const leaderboard = document.getElementById('leaderboard');
+      const topProducts = Object.values(products).flat().sort((a, b) => b.votes - a.votes).slice(0, 5);
+      leaderboard.innerHTML = topProducts.map(p => `<li>${p.name} - 👍 ${p.votes}</li>`).join('');
+    }
+
+    function addSurpriseDrop() {
+      const types = ['cc', 'gift', 'crypto', 'fullz', 'tools'];
+      const type = types[Math.floor(Math.random() * types.length)];
+      const id = Math.max(...Object.values(products).flat().map(p => p.id)) + 1;
+      const product = { id, name: `${type === 'cc' ? 'Ultra Visa' : type === 'gift' ? 'Elite Amazon' : type === 'crypto' ? 'Prime BTC' : type === 'fullz' ? 'Gold Fullz' : 'Master Keylogger'}`, price: Math.floor(Math.random() * 600 + 200), type, balance: type === 'cc' ? Math.floor(Math.random() * 12000 + 3000) : type === 'gift' ? Math.floor(Math.random() * 600 + 200) : 0, bin: type === 'cc' ? '414720' + Math.random().toString().slice(2, 12) : '', reviews: [], votes: 0, verified: true, auctionActive: Math.random() > 0.5, currentBid: Math.floor(Math.random() * 300 + 100), auctionEnd: Date.now() + Math.random() * 60000 };
+      products[type].push(product);
+      const alert = document.getElementById('dropAlert');
+      alert.textContent = `New Drop! ${product.name} - $${product.price}`;
+      alert.style.display = 'block';
+      document.getElementById('dropSound').play();
+      setTimeout(() => alert.style.display = 'none', 5000);
+      renderProducts();
+      updateLeaderboard();
+      updateAuctions();
+    }
+
+    function toggleChat() {
+      const chatWindow = document.getElementById('chatWindow');
+      chatWindow.style.display = chatWindow.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const msg = input.value.trim();
+      if (msg && currentUser) {
+        const messages = document.getElementById('chatMessages');
+        messages.innerHTML += `<small><i>${currentUser}: ${msg}</i></small><br>`;
+        input.value = '';
+        setTimeout(() => {
+          messages.innerHTML += `<small><i>@rakrunnin: Got it, stacking your order now.</i></small><br>`;
+        }, 2000);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    function updateAuctions() {
+      auctions = Object.values(products).flat().filter(p => p.auctionActive && p.auctionEnd > Date.now());
+      document.getElementById('liveAuctions').textContent = auctions.length;
+      auctions.forEach(p => {
+        if (p.auctionEnd <= Date.now()) {
+          p.auctionActive = false;
+          showPopup(`Auction ended for ${p.name}! Sold for $${p.currentBid}`);
+        }
+      });
     }
 
     // Initial load
     renderProducts();
     updateCart();
     updateProfile();
-    document.getElementById('priceRange').value = 500;
-    document.getElementById('balanceRange').value = 10000;
+    updateStats();
+    updateLeaderboard();
+    setInterval(addSurpriseDrop, 20000); // Drops every 20s
+    setInterval(updateAuctions, 1000); // Update auctions every second
   </script>
 </body>
 </html>
