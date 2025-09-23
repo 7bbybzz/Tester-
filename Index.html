@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RakRunnas - Premium Cards</title>
+    <title>RakRunnas - Premium Cards & Gift Cards</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
@@ -17,31 +17,47 @@
         }
         header {
             background: #121212;
-            padding: 20px;
-            text-align: center;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             border-bottom: 2px solid #d4af37;
         }
         .logo {
-            font-size: 2.5em;
+            font-size: 2.2em;
             font-weight: 700;
             color: #d4af37;
+            text-align: center;
         }
         nav {
+            text-align: center;
             margin: 10px 0;
         }
         nav a {
             color: #d4af37;
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 20px;
             font-size: 1.1em;
+            transition: color 0.3s;
         }
         nav a:hover {
-            text-decoration: underline;
+            color: #fff;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+        }
+        .hero {
+            text-align: center;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .hero h2 {
+            color: #d4af37;
+            font-size: 1.8em;
         }
         .products {
             display: grid;
@@ -54,18 +70,20 @@
             padding: 15px;
             border-radius: 10px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .product:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         .product img {
-            max-width: 100px;
+            max-width: 80px;
             margin-bottom: 10px;
         }
         .product h3 {
             margin: 10px 0;
             color: #d4af37;
+            font-size: 1.3em;
         }
         .product p {
             font-size: 0.9em;
@@ -79,6 +97,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: 700;
+            transition: background 0.3s;
         }
         .product button:hover {
             background: #b8962e;
@@ -93,6 +112,7 @@
             background: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
+            z-index: 200;
         }
         .cart-content {
             background: #2a2a2a;
@@ -103,10 +123,12 @@
         }
         .cart-content h2 {
             color: #d4af37;
+            margin-top: 0;
         }
         .cart-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid #444;
         }
@@ -116,12 +138,22 @@
             padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
+            color: #fff;
         }
         .cart-item button:hover {
             background: #cc0000;
         }
+        .cart-total {
+            font-size: 1.2em;
+            color: #d4af37;
+            margin: 10px 0;
+        }
         .reviews {
             margin: 40px 0;
+        }
+        .reviews h2 {
+            color: #d4af37;
+            text-align: center;
         }
         .review {
             background: #2a2a2a;
@@ -137,12 +169,14 @@
         .review p {
             font-size: 0.9em;
             color: #ccc;
+            margin: 10px 0;
         }
         .review-img {
-            max-width: 200px;
+            max-width: 250px;
             border-radius: 5px;
             margin-top: 10px;
-            position: relative;
+            display: block;
+            border: 1px solid #444;
         }
         .watermark {
             position: absolute;
@@ -150,7 +184,8 @@
             left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
             color: rgba(255, 255, 255, 0.3);
-            font-size: 1.5em;
+            font-size: 1.8em;
+            font-weight: 700;
             pointer-events: none;
         }
         .badge {
@@ -179,6 +214,7 @@
             border: 1px solid #d4af37;
             color: #fff;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         .payment-form button {
             background: #d4af37;
@@ -188,23 +224,37 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: 700;
+            width: 100%;
         }
         .payment-form button:hover {
             background: #b8962e;
         }
         .h-captcha {
-            margin: 10px 0;
+            margin: 15px 0;
         }
         .close-btn {
             background: #ff4d4d;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             color: #fff;
+            margin-top: 10px;
         }
         .close-btn:hover {
             background: #cc0000;
+        }
+        @media (max-width: 600px) {
+            nav a {
+                margin: 0 10px;
+                font-size: 1em;
+            }
+            .product img {
+                max-width: 60px;
+            }
+            .review-img {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -219,54 +269,72 @@
         </nav>
     </header>
     <div class="container">
+        <section class="hero">
+            <h2>Welcome to RakRunnas</h2>
+            <p>The #1 plug for premium cards & gift cards. Cash App only. Fast, secure, trusted.</p>
+        </section>
+
         <section id="products" class="products">
             <div class="product">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa Logo">
                 <h3>Visa Platinum</h3>
-                <p>High-limit Visa cards, fresh & verified. $50 Cash App.</p>
+                <p>High-limit Visa card, fresh daily. $50 Cash App.</p>
                 <button onclick="addToCart('Visa Platinum', 50)">Add to Cart</button>
             </div>
             <div class="product">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard Logo">
                 <h3>MasterCard Gold</h3>
-                <p>Premium MasterCard, full details. $75 Cash App.</p>
+                <p>Premium MasterCard, fullz included. $75 Cash App.</p>
                 <button onclick="addToCart('MasterCard Gold', 75)">Add to Cart</button>
             </div>
             <div class="product">
                 <img src="https://www.saksfifthavenue.com/cdn/shop/files/saks-fifth-avenue-logo_150x.png" alt="Saks Logo">
                 <h3>Saks Gift Card</h3>
-                <p>$500 Saks Fifth Avenue gift card, instant delivery. $100 Cash App.</p>
+                <p>$500 Saks Fifth Avenue gift card, instant. $100 Cash App.</p>
                 <button onclick="addToCart('Saks Gift Card', 100)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/American_Express_logo_%282018%29.svg" alt="Amex Logo">
+                <h3>Amex Black</h3>
+                <p>Elite Amex card, high balance. $120 Cash App.</p>
+                <button onclick="addToCart('Amex Black', 120)">Add to Cart</button>
             </div>
         </section>
 
         <section id="reviews" class="reviews">
-            <h2>Customer Reviews</h2>
+            <h2>What Our Customers Say</h2>
             <div class="review">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>yo rakrunnas got me right ordered a visa card got uber eats for days no cap fast af</p>
-                <img class="review-img" src="https://via.placeholder.com/200x100?text=Uber+Eats+Order" alt="Review Screenshot">
+                <p>rakrunnas the realest got a visa card ordered hella uber eats food came quick no cap</p>
+                <img class="review-img" src="https://via.placeholder.com/250x150?text=Uber+Eats+Order+Confirmed" alt="Uber Eats Screenshot">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Confirmed Purchase</span>
             </div>
             <div class="review">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-                <p>bought saks card copped some drip from fifth ave shit was smooth trusted</p>
-                <img class="review-img" src="https://via.placeholder.com/200x100?text=Saks+Order" alt="Review Screenshot">
+                <p>copped a saks card went crazy on some designer drip shit was smooth af rakrunnas legit</p>
+                <img class="review-img" src="https://via.placeholder.com/250x150?text=Saks+Order+Receipt" alt="Saks Screenshot">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Confirmed Purchase</span>
             </div>
             <div class="review">
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>rakrunnas the plug fr got a mastercard hit up some online stores no issues</p>
-                <img class="review-img" src="https://via.placeholder.com/200x100?text=Bank+Transaction" alt="Review Screenshot">
+                <p>mastercard from rakrunnas hit different got cash app deposits poppin no issues fr</p>
+                <img class="review-img" src="https://via.placeholder.com/250x150?text=Cash+App+Deposit" alt="Cash App Screenshot">
+                <div class="watermark">RakRunnas</div>
+                <span class="badge">Confirmed Purchase</span>
+            </div>
+            <div class="review">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <p>amex card was fire used it for some online orders rakrunnas got the plug trust</p>
+                <img class="review-img" src="https://via.placeholder.com/250x150?text=Bank+Transaction+Success" alt="Bank Screenshot">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Confirmed Purchase</span>
             </div>
         </section>
 
         <section class="payment-form">
-            <h2>Checkout</h2>
+            <h2>Secure Checkout</h2>
             <form id="payment-form">
                 <input type="text" id="name" placeholder="Full Name" required>
                 <input type="email" id="email" placeholder="Email Address" required>
@@ -281,7 +349,7 @@
         <div class="cart-content">
             <h2>Your Cart</h2>
             <div id="cart-items"></div>
-            <p>Total: $<span id="cart-total">0</span></p>
+            <p class="cart-total">Total: $<span id="cart-total">0</span></p>
             <button class="close-btn" onclick="closeCart()">Close</button>
         </div>
     </div>
@@ -340,6 +408,11 @@
 
             if (!hcaptchaResponse) {
                 alert('Please complete the CAPTCHA.');
+                return;
+            }
+
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                alert('Invalid email address.');
                 return;
             }
 
