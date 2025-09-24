@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RakRunnas - Singularity Plug</title>
+    <title>RakRunnas - The Streets' Finest</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <style>
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: #0a0f1e;
+            background: #050c1a;
             color: #e0e0e0;
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         .captcha-modal {
             display: flex;
@@ -30,64 +30,64 @@
         }
         .captcha-content {
             background: #1a2a3b;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 35px;
+            border-radius: 15px;
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
-            animation: glitch 1s infinite;
+            box-shadow: 0 0 30px rgba(212, 160, 23, 0.7);
         }
         .captcha-content h2 {
-            color: #f4c430;
+            color: #d4a017;
             font-size: 2.5em;
         }
         .fake-captcha {
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .fake-captcha:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(212, 160, 23, 0.5);
         }
         .fake-captcha p {
             color: #000;
             margin: 0;
             font-size: 1.3em;
+            font-weight: 600;
         }
         header {
             background: #03080f;
-            padding: 15px 20px;
+            padding: 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid #f4c430;
-            transform: translateZ(0);
+            border-bottom: 3px solid #d4a017;
         }
         .logo {
             font-size: 3.5em;
             font-weight: 700;
-            color: #f4c430;
+            color: #d4a017;
             text-align: center;
-            text-shadow: 0 0 10px #00d4ff;
+            text-shadow: 0 0 10px rgba(212, 160, 23, 0.5);
         }
         nav {
             text-align: center;
-            margin: 10px 0;
+            margin: 15px 0;
         }
         nav a {
-            color: #f4c430;
+            color: #d4a017;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 25px;
             font-size: 1.4em;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
         nav a:hover {
-            color: #00d4ff;
+            color: #fff;
+            transform: scale(1.1);
         }
         .dropdown {
             position: relative;
@@ -97,22 +97,23 @@
             display: none;
             position: absolute;
             background: #1a2a3b;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             z-index: 1;
-            border-radius: 8px;
+            border-radius: 10px;
         }
         .dropdown:hover .dropdown-content {
             display: block;
         }
         .dropdown-content a {
             color: #e0e0e0;
-            padding: 12px 16px;
+            padding: 15px 20px;
             display: block;
             text-align: left;
+            transition: background 0.3s;
         }
         .dropdown-content a:hover {
-            background: #f4c430;
+            background: #d4a017;
             color: #03080f;
         }
         .cart-icon {
@@ -122,142 +123,145 @@
             position: absolute;
             top: -12px;
             right: -12px;
-            background: #f4c430;
+            background: #d4a017;
             color: #03080f;
             border-radius: 50%;
-            padding: 6px 12px;
-            font-size: 0.9em;
+            padding: 8px 14px;
+            font-size: 1em;
             animation: pulse 1.5s infinite;
         }
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 30px;
-            perspective: 1000px;
+            padding: 40px;
         }
         .trust-banner {
             text-align: center;
             background: #1a2a3b;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            color: #f4c430;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            color: #d4a017;
             font-size: 1.2em;
             animation: fadeIn 1s ease-in;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
         .hero {
             position: relative;
-            height: 500px;
+            height: 450px;
             overflow: hidden;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #0a0f1e, #1a2a3b);
+            border-radius: 15px;
+            margin-bottom: 40px;
         }
         .hero-slide {
             display: none;
             text-align: center;
-            padding: 100px;
+            padding: 80px;
+            background: linear-gradient(135deg, #1a2a3b, #050c1a);
             height: 100%;
-            animation: glitch 2s infinite;
+            animation: slideIn 0.7s ease-in;
         }
         .hero-slide.active {
             display: block;
         }
         .hero-slide h2 {
-            color: #f4c430;
+            color: #d4a017;
             font-size: 3em;
-            text-shadow: 0 0 10px #00d4ff;
+            text-shadow: 0 0 10px rgba(212, 160, 23, 0.5);
         }
         .hero-slide p {
-            font-size: 1.5em;
+            font-size: 1.4em;
             color: #b0b0b0;
         }
         .ticker {
             background: #03080f;
-            padding: 12px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 30px;
             overflow: hidden;
             white-space: nowrap;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
         }
         .ticker span {
             display: inline-block;
-            padding-right: 30px;
-            animation: ticker 15s linear infinite;
-            color: #00d4ff;
+            padding-right: 40px;
+            animation: ticker 12s linear infinite;
+            color: #d4a017;
+            font-size: 1.1em;
         }
         .filters {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .filters button {
             background: #1a2a3b;
-            color: #f4c430;
-            border: 1px solid #f4c430;
-            padding: 12px 25px;
-            margin: 0 8px;
-            border-radius: 8px;
+            color: #d4a017;
+            border: 2px solid #d4a017;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: 600;
             transition: background 0.3s, transform 0.3s;
         }
         .filters button.active, .filters button:hover {
-            background: #f4c430;
+            background: #d4a017;
             color: #03080f;
             transform: scale(1.05);
         }
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
         }
         .product {
             background: #1a2a3b;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
-            transform-style: preserve-3d;
         }
         .product:hover {
-            transform: rotateY(10deg) scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
-            animation: glitch 0.5s;
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(212, 160, 23, 0.7);
         }
         .product img {
-            max-width: 120px;
-            margin-bottom: 15px;
+            max-width: 140px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .product:hover img {
+            transform: scale(1.2);
         }
         .product h3 {
-            margin: 10px 0;
-            color: #f4c430;
+            margin: 15px 0;
+            color: #d4a017;
             font-size: 1.8em;
         }
         .product p {
-            font-size: 0.95em;
+            font-size: 1em;
             color: #b0b0b0;
         }
         .card-number {
-            font-size: 0.9em;
+            font-size: 0.95em;
             color: #e0e0e0;
             background: #03080f;
-            padding: 8px 15px;
-            border-radius: 5px;
-            margin: 10px 0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
         }
         .product button {
-            background: #f4c430;
+            background: #d4a017;
             color: #03080f;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 15px 40px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1.1em;
             transition: background 0.3s, transform 0.3s;
         }
         .product button:hover {
-            background: #00d4ff;
+            background: #b88c14;
             transform: scale(1.05);
         }
         .cart-modal {
@@ -274,104 +278,130 @@
         }
         .cart-content {
             background: #1a2a3b;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 800px;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 900px;
             width: 90%;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 30px rgba(212, 160, 23, 0.5);
         }
         .cart-content h2 {
-            color: #f4c430;
+            color: #d4a017;
             margin-top: 0;
+            font-size: 2.2em;
         }
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 20px 0;
             border-bottom: 1px solid #444;
         }
         .cart-item img {
-            max-width: 50px;
-            margin-right: 10px;
+            max-width: 60px;
+            margin-right: 15px;
+        }
+        .cart-item span {
+            flex: 1;
+            text-align: left;
         }
         .cart-item select {
             background: #03080f;
             color: #e0e0e0;
-            border: 1px solid #f4c430;
-            padding: 5px;
-            border-radius: 5px;
+            border: 1px solid #d4a017;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 1em;
         }
         .cart-item button {
             background: #ff4d4d;
             border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
             color: #fff;
+            font-weight: 600;
         }
         .cart-item button:hover {
             background: #cc0000;
         }
         .cart-total {
-            font-size: 1.6em;
-            color: #f4c430;
-            margin: 15px 0;
-            text-shadow: 0 0 5px #00d4ff;
+            font-size: 1.8em;
+            color: #d4a017;
+            margin: 20px 0;
         }
         .discount-toggle {
-            margin: 10px 0;
-            color: #f4c430;
+            margin: 15px 0;
+            color: #d4a017;
+            font-size: 1.1em;
         }
         .clear-cart {
             background: #ff4d4d;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
         }
         .clear-cart:hover {
             background: #cc0000;
         }
+        .close-btn {
+            background: #d4a017;
+            color: #03080f;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .close-btn:hover {
+            background: #b88c14;
+        }
         .reviews {
-            margin: 60px 0;
-            position: relative;
+            margin: 80px 0;
         }
         .reviews h2 {
-            color: #f4c430;
+            color: #d4a017;
             text-align: center;
             font-size: 2.5em;
-            text-shadow: 0 0 10px #00d4ff;
+            margin-bottom: 40px;
         }
         .review {
             background: #1a2a3b;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
             position: relative;
-            animation: slideIn 0.5s ease-in;
+            animation: slideIn 0.7s ease-in;
         }
         .review-username {
-            color: #f4c430;
+            color: #d4a017;
             font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 1.3em;
+            margin-bottom: 10px;
         }
         .stars {
-            color: #f4c430;
-            margin-bottom: 15px;
+            color: #d4a017;
+            margin-bottom: 20px;
+            font-size: 1.2em;
         }
         .review p {
-            font-size: 0.95em;
+            font-size: 1em;
             color: #b0b0b0;
-            margin: 10px 0;
+            margin: 15px 0;
         }
         .review-img {
-            max-width: 450px;
-            border-radius: 10px;
-            margin-top: 15px;
+            max-width: 500px;
+            border-radius: 12px;
+            margin-top: 20px;
             display: block;
             border: 1px solid #444;
+            transition: transform 0.3s;
+        }
+        .review-img:hover {
+            transform: scale(1.05);
         }
         .watermark {
             position: absolute;
@@ -379,86 +409,90 @@
             left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
             color: rgba(255, 255, 255, 0.3);
-            font-size: 2.8em;
+            font-size: 3em;
             font-weight: 700;
             pointer-events: none;
         }
         .badge {
             display: inline-block;
-            background: #f4c430;
+            background: #d4a017;
             color: #03080f;
-            padding: 6px 12px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            margin-left: 10px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-left: 15px;
         }
         .payment-form {
             background: #1a2a3b;
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 60px;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 80px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
         .payment-form h2 {
-            color: #f4c430;
-            font-size: 2.2em;
+            color: #d4a017;
+            font-size: 2.5em;
         }
         .payment-form img {
-            max-width: 280px;
-            margin: 20px 0;
-            border-radius: 10px;
+            max-width: 300px;
+            margin: 25px 0;
+            border-radius: 12px;
         }
         .payment-form input {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
+            padding: 15px;
+            margin: 15px 0;
             background: #03080f;
-            border: 1px solid #f4c430;
+            border: 2px solid #d4a017;
             color: #e0e0e0;
-            border-radius: 5px;
+            border-radius: 8px;
             box-sizing: border-box;
+            font-size: 1.1em;
         }
         .payment-form button {
-            background: #f4c430;
+            background: #d4a017;
             color: #03080f;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 15px 40px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1.2em;
             width: 100%;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
         .payment-form button:hover {
-            background: #00d4ff;
+            background: #b88c14;
+            transform: scale(1.05);
         }
         .chat-widget {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background: #1a2a3b;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(212, 160, 23, 0.4);
             z-index: 200;
             animation: pulse 2s infinite;
         }
         .chat-widget p {
             margin: 0;
-            color: #f4c430;
+            color: #d4a017;
+            font-size: 1.1em;
         }
         .added-popup {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #f4c430;
+            top: 30px;
+            right: 30px;
+            background: #d4a017;
             color: #03080f;
-            padding: 12px 25px;
-            border-radius: 8px;
+            padding: 15px 30px;
+            border-radius: 10px;
             z-index: 300;
-            animation: fadeInOut 2s ease-in-out;
+            animation: fadeInOut 2.5s ease-in-out;
             display: none;
+            font-weight: 600;
         }
         .confetti-canvas, .particle-canvas {
             position: fixed;
@@ -467,31 +501,23 @@
             pointer-events: none;
             z-index: 400;
         }
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(2px, -2px); }
-            60% { transform: translate(-2px, 0); }
-            80% { transform: translate(2px, 0); }
-            100% { transform: translate(0); }
-        }
         @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(-10px); }
+            0% { opacity: 0; transform: translateY(-15px); }
             10% { opacity: 1; transform: translateY(0); }
             90% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 0; transform: translateY(-15px); }
         }
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
         @keyframes ticker {
@@ -500,17 +526,21 @@
         }
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+            25% { transform: translateX(-7px); }
+            75% { transform: translateX(7px); }
         }
         @media (max-width: 600px) {
-            .logo { font-size: 2.5em; }
-            nav a { margin: 0 10px; font-size: 1.1em; }
+            .logo { font-size: 2.8em; }
+            nav a { margin: 0 15px; font-size: 1.2em; }
+            .product { padding: 20px; }
             .product img { max-width: 100px; }
             .review-img { max-width: 100%; }
-            .hero { height: 300px; }
-            .hero-slide h2 { font-size: 2em; }
-            .filters button { padding: 8px 15px; }
+            .hero { height: 350px; }
+            .hero-slide h2 { font-size: 2.2em; }
+            .hero-slide p { font-size: 1.2em; }
+            .filters button { padding: 10px 20px; }
+            .cart-content { padding: 20px; }
+            .payment-form { padding: 20px; }
         }
     </style>
 </head>
@@ -518,8 +548,8 @@
     <canvas id="particle-canvas" class="particle-canvas"></canvas>
     <div id="captcha-modal" class="captcha-modal">
         <div class="captcha-content">
-            <h2>RakRunnas - Singularity Plug</h2>
-            <p>Click to enter the streets' #1 source.</p>
+            <h2>RakRunnas - The Streets' Finest</h2>
+            <p>Click to lock in with the #1 plug.</p>
             <div class="fake-captcha" onclick="enterSite()">
                 <p>Verify I'm Real ✅</p>
             </div>
@@ -549,24 +579,24 @@
     </header>
 
     <div class="container">
-        <div class="trust-banner">Verified by 15K+ Customers Since 2023</div>
+        <div class="trust-banner">Trusted by 15K+ Customers Since 2023 | Secure Checkout</div>
         <section class="hero">
             <div class="hero-slide active">
-                <h2>RakRunnas - The Streets' Plug</h2>
-                <p>Elite cards, gift cards, and bank logs. Cash App only. 100% legit.</p>
+                <h2>RakRunnas - The Streets' Finest</h2>
+                <p>Elite cards, gift cards, and logs. Cash App only. Instant delivery.</p>
             </div>
             <div class="hero-slide">
-                <h2>Flash Drop!</h2>
-                <p>60% off Amex Black & Chase Logs for 12 hours only!</p>
+                <h2>Drop of the Week!</h2>
+                <p>70% off Amex Black & USAA Logs - 6 hours left!</p>
             </div>
             <div class="hero-slide">
-                <h2>Instant Hookup</h2>
-                <p>Orders delivered in minutes. RakRunnas runs the game.</p>
+                <h2>Run It Up!</h2>
+                <p>Orders delivered in minutes. RakRunnas owns the game.</p>
             </div>
         </section>
 
         <div class="ticker">
-            <span>Recent Purchases: dripgod23 copped Visa Platinum • cashoutking got Chase Log • sneakerplug7 bought Saks Gift Card • trapstar99 ordered DoorDash • hustlemanx grabbed Wells Fargo Log • moneybaggz copped BoA Log • stackzondemand got Apple Pay</span>
+            <span>Recent Purchases: dripgod23 copped Visa Platinum • cashoutking grabbed Chase Log • sneakerplug7 bought Saks Card • trapstar99 ordered DoorDash • hustlemanx got Wells Fargo Log • moneybaggz copped BoA Log • stackzondemand scored Amazon Card</span>
         </div>
 
         <div class="filters">
@@ -655,39 +685,39 @@
                 <button onclick="addToCart('PayPal Account', 180, 'https://upload.wikimedia.org/wikipedia/commons/7/78/2014_PayPal_logo.svg')">Add to Cart</button>
             </div>
             <div class="product" data-category="gift">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Square_Cash_app_logo_%282020%29.svg" alt="Cash App Logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_Cash_app_logo.svg" alt="Cash App Logo">
                 <h3>Cash App Account</h3>
                 <p>Verified Cash App account, $1000 balance. $200 Cash App.</p>
                 <div class="card-number" id="cashapp-number"></div>
-                <button onclick="addToCart('Cash App Account', 200, 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Square_Cash_app_logo_%282020%29.svg')">Add to Cart</button>
+                <button onclick="addToCart('Cash App Account', 200, 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_Cash_app_logo.svg')">Add to Cart</button>
             </div>
             <div class="product" data-category="gift">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Venmo_Logo.svg" alt="Venmo Logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Apple_logo_black.svg" alt="Apple Logo">
+                <h3>Apple Gift Card</h3>
+                <p>$200 Apple gift card, instant. $90 Cash App.</p>
+                <div class="card-number" id="apple-number"></div>
+                <button onclick="addToCart('Apple Gift Card', 90, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Apple_logo_black.svg')">Add to Cart</button>
+            </div>
+            <div class="product" data-category="gift">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Netflix_2015_logo.svg" alt="Netflix Logo">
+                <h3>Netflix Gift Card</h3>
+                <p>$100 Netflix credit, instant. $60 Cash App.</p>
+                <div class="card-number" id="netflix-number"></div>
+                <button onclick="addToCart('Netflix Gift Card', 60, 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Netflix_2015_logo.svg')">Add to Cart</button>
+            </div>
+            <div class="product" data-category="gift">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Spotify_logo_with_text.svg" alt="Spotify Logo">
+                <h3>Spotify Gift Card</h3>
+                <p>$100 Spotify credit, instant. $55 Cash App.</p>
+                <div class="card-number" id="spotify-number"></div>
+                <button onclick="addToCart('Spotify Gift Card', 55, 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Spotify_logo_with_text.svg')">Add to Cart</button>
+            </div>
+            <div class="product" data-category="gift">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Venmo_Logo.svg" alt="Venmo Logo">
                 <h3>Venmo Account</h3>
-                <p>Verified Venmo account, $900 balance. $190 Cash App.</p>
+                <p>Verified Venmo account, $700 balance. $170 Cash App.</p>
                 <div class="card-number" id="venmo-number"></div>
-                <button onclick="addToCart('Venmo Account', 190, 'https://upload.wikimedia.org/wikipedia/commons/8/88/Venmo_Logo.svg')">Add to Cart</button>
-            </div>
-            <div class="product" data-category="gift">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Apple_Pay_logo.svg" alt="Apple Pay Logo">
-                <h3>Apple Pay Account</h3>
-                <p>Verified Apple Pay account, $700 balance. $170 Cash App.</p>
-                <div class="card-number" id="applepay-number"></div>
-                <button onclick="addToCart('Apple Pay Account', 170, 'https://upload.wikimedia.org/wikipedia/commons/3/39/Apple_Pay_logo.svg')">Add to Cart</button>
-            </div>
-            <div class="product" data-category="gift">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Neiman_Marcus_logo.svg" alt="Neiman Marcus Logo">
-                <h3>Neiman Marcus Gift Card</h3>
-                <p>$400 Neiman Marcus gift card. $120 Cash App.</p>
-                <div class="card-number" id="neiman-number"></div>
-                <button onclick="addToCart('Neiman Marcus Gift Card', 120, 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Neiman_Marcus_logo.svg')">Add to Cart</button>
-            </div>
-            <div class="product" data-category="gift">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Nordstrom_Logo.svg" alt="Nordstrom Logo">
-                <h3>Nordstrom Gift Card</h3>
-                <p>$350 Nordstrom gift card. $110 Cash App.</p>
-                <div class="card-number" id="nordstrom-number"></div>
-                <button onclick="addToCart('Nordstrom Gift Card', 110, 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Nordstrom_Logo.svg')">Add to Cart</button>
+                <button onclick="addToCart('Venmo Account', 170, 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Venmo_Logo.svg')">Add to Cart</button>
             </div>
             <div class="product" data-category="logs">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Chase_logo_2007.svg" alt="Chase Logo">
@@ -717,6 +747,20 @@
                 <div class="card-number" id="citi-number"></div>
                 <button onclick="addToCart('Citi Bank Log', 160, 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Citi.svg')">Add to Cart</button>
             </div>
+            <div class="product" data-category="logs">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Capital_One_logo.svg" alt="Capital One Logo">
+                <h3>Capital One Log</h3>
+                <p>High-balance Capital One log, fresh. $175 Cash App.</p>
+                <div class="card-number" id="capitalone-number"></div>
+                <button onclick="addToCart('Capital One Log', 175, 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Capital_One_logo.svg')">Add to Cart</button>
+            </div>
+            <div class="product" data-category="logs">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/USAA_logo.svg" alt="USAA Logo">
+                <h3>USAA Bank Log</h3>
+                <p>Premium USAA log, verified. $190 Cash App.</p>
+                <div class="card-number" id="usaa-number"></div>
+                <button onclick="addToCart('USAA Bank Log', 190, 'https://upload.wikimedia.org/wikipedia/commons/3/3b/USAA_logo.svg')">Add to Cart</button>
+            </div>
         </section>
 
         <section id="reviews" class="reviews">
@@ -725,7 +769,7 @@
                 <div class="review-username">dripgod23</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>rakrunnas the plug fr visa card hit uber eats got wings n sushi in 20min no cap</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1611162617210-7d15e6c753f7" alt="Uber Eats Order">
+                <img class="review-img" src="https://images.unsplash.com/photo-1611162617210-7d673e9b7467?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Uber Eats Order">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -733,7 +777,7 @@
                 <div class="review-username">sneakerplug7</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
                 <p>saks card was straight fire copped gucci slides n a jacket rakrunnas the realest</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Saks Order">
+                <img class="review-img" src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Saks Order">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -741,7 +785,7 @@
                 <div class="review-username">cashoutking</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>mastercard from rakrunnas hit crazy cash app deposits popped off no issues fr</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1556740714-7c4a6b8b8b8b" alt="Cash App Payment">
+                <img class="review-img" src="https://images.unsplash.com/photo-1594099762654-7e7b3c27e1f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Cash App Payment">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -749,7 +793,7 @@
                 <div class="review-username">trapstar99</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
                 <p>doordash card was clutch fed the squad pizza n wings rakrunnas runnin it</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="DoorDash Delivery">
+                <img class="review-img" src="https://images.unsplash.com/photo-1513104890138-7c749659a680?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="DoorDash Delivery">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -757,7 +801,7 @@
                 <div class="review-username">bankrollz2</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>chase log from rakrunnas clean af moved bread quick no problems trust</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1560264285-4b7d6e0d7c9f" alt="Chase Transfer">
+                <img class="review-img" src="https://images.unsplash.com/photo-1560264280-5a8e1e1e3b75?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Chase Transfer">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -765,7 +809,7 @@
                 <div class="review-username">hustlemanx</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
                 <p>wells fargo log was legit hit a big transfer rakrunnas the goat fr</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1579621970795-87facc4f6b64" alt="Wells Fargo Transaction">
+                <img class="review-img" src="https://images.unsplash.com/photo-1556740738-6b4a6d8b6b9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Wells Fargo Transfer">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -773,7 +817,7 @@
                 <div class="review-username">moneybaggz</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 <p>boa log from rakrunnas was fire moved funds quick no cap best plug out</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" alt="BoA Transfer">
+                <img class="review-img" src="https://images.unsplash.com/photo-1560264280-5a8e1e1e3b75?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="BoA Transfer">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
@@ -781,32 +825,16 @@
                 <div class="review-username">stackzondemand</div>
                 <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
                 <p>amazon card from rakrunnas hit different copped a ps5 n some drip quick</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Amazon Order">
-                <div class="watermark">RakRunnas</div>
-                <span class="badge">Verified Purchase</span>
-            </div>
-            <div class="review">
-                <div class="review-username">flexmasterx</div>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                <p>apple pay account was smooth af sent bread to my squad no issues rakrunnas legit</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1591696205602-2f950c9c6d44" alt="Apple Pay Transaction">
-                <div class="watermark">RakRunnas</div>
-                <span class="badge">Verified Purchase</span>
-            </div>
-            <div class="review">
-                <div class="review-username">pluglord88</div>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-                <p>venmo account from rakrunnas was fire moved funds quick no cap</p>
-                <img class="review-img" src="https://images.unsplash.com/photo-1556740714-7c4a6b8b8b8b" alt="Venmo Payment">
+                <img class="review-img" src="https://images.unsplash.com/photo-1505236858219-8359eb29e859?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Amazon Order">
                 <div class="watermark">RakRunnas</div>
                 <span class="badge">Verified Purchase</span>
             </div>
         </section>
 
         <section class="payment-form">
-            <h2>Secure Invoice Payment</h2>
-            <p>Scan the QR code or enter your Cash App username to lock in.</p>
-            <img src="https://images.unsplash.com/photo-1611162617210-7d15e6c753f7" alt="Cash App QR Code">
+            <h2>Secure Checkout</h2>
+            <p>Scan the QR code or enter your Cash App username to secure your order.</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_Cash_app_logo.svg" alt="Cash App QR Code">
             <form id="payment-form">
                 <input type="text" id="name" placeholder="Full Name" required>
                 <input type="text" id="cashapp" placeholder="Cash App Username" required>
@@ -824,7 +852,9 @@
             <h2>Your Cart</h2>
             <div id="cart-items"></div>
             <p class="cart-total">Total: $<span id="cart-total">0</span></p>
-            <p class="discount-info">Discount: <span id="discount-amount">0%</span></p>
+            <label class="discount-toggle">
+                <input type="checkbox" id="discount" onchange="updateCart()"> Auto-Apply 15% off (3+ items)
+            </label>
             <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
             <button class="close-btn" onclick="closeCart()">Close</button>
         </div>
@@ -834,7 +864,7 @@
     <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
 
     <script>
-        // Particle effect on page load
+        // Particle storm on load
         const particleCanvas = document.getElementById('particle-canvas');
         particleCanvas.width = window.innerWidth;
         particleCanvas.height = window.innerHeight;
@@ -844,10 +874,10 @@
             particles.push({
                 x: Math.random() * particleCanvas.width,
                 y: Math.random() * particleCanvas.height,
-                size: Math.random() * 4 + 1,
-                speedX: Math.random() * 2 - 1,
-                speedY: Math.random() * 2 - 1,
-                color: ['#f4c430', '#00d4ff'][Math.floor(Math.random() * 2)]
+                size: Math.random() * 4 + 2,
+                speedX: Math.random() * 3 - 1.5,
+                speedY: Math.random() * 3 - 1.5,
+                color: ['#d4a017', '#ff4d4d', '#ffffff'][Math.floor(Math.random() * 3)]
             });
         }
         function animateParticles() {
@@ -894,14 +924,16 @@
         document.getElementById('amazon-number').textContent = generateCardNumber(12);
         document.getElementById('paypal-number').textContent = generateCardNumber(10);
         document.getElementById('cashapp-number').textContent = generateCardNumber(10);
+        document.getElementById('apple-number').textContent = generateCardNumber(12);
+        document.getElementById('netflix-number').textContent = generateCardNumber(12);
+        document.getElementById('spotify-number').textContent = generateCardNumber(12);
         document.getElementById('venmo-number').textContent = generateCardNumber(10);
-        document.getElementById('applepay-number').textContent = generateCardNumber(10);
-        document.getElementById('neiman-number').textContent = generateCardNumber(12);
-        document.getElementById('nordstrom-number').textContent = generateCardNumber(12);
         document.getElementById('chase-number').textContent = 'Acct: ' + generateCardNumber(10);
         document.getElementById('wells-number').textContent = 'Acct: ' + generateCardNumber(10);
         document.getElementById('boa-number').textContent = 'Acct: ' + generateCardNumber(10);
         document.getElementById('citi-number').textContent = 'Acct: ' + generateCardNumber(10);
+        document.getElementById('capitalone-number').textContent = 'Acct: ' + generateCardNumber(10);
+        document.getElementById('usaa-number').textContent = 'Acct: ' + generateCardNumber(10);
 
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -915,7 +947,7 @@
             setTimeout(() => {
                 popup.style.display = 'none';
                 document.getElementById('cart-modal').classList.remove('shake');
-            }, 2000);
+            }, 2500);
             const badge = document.getElementById('cart-count');
             badge.style.animation = 'pulse 0.5s';
             setTimeout(() => badge.style.animation = 'pulse 1.5s infinite', 500);
@@ -944,11 +976,9 @@
             const cartItems = document.getElementById('cart-items');
             const cartCount = document.getElementById('cart-count');
             const cartTotal = document.getElementById('cart-total');
-            const discountAmount = document.getElementById('discount-amount');
             cartItems.innerHTML = '';
             let total = 0;
-            let itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            let discount = itemCount >= 5 ? 0.85 : itemCount >= 3 ? 0.9 : 1;
+            const discount = cart.reduce((sum, item) => sum + item.quantity, 0) >= 3 ? 0.85 : 1;
 
             cart.forEach((item, index) => {
                 total += item.price * item.quantity;
@@ -966,9 +996,9 @@
                 cartItems.appendChild(div);
             });
 
-            cartCount.textContent = itemCount;
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartTotal.textContent = (total * discount).toFixed(2);
-            discountAmount.textContent = itemCount >= 5 ? '15%' : itemCount >= 3 ? '10%' : '0%';
+            document.getElementById('discount').checked = discount < 1;
         }
 
         function openCart() {
@@ -1038,7 +1068,7 @@
             slides.forEach(slide => slide.classList.remove('active'));
             slides[currentSlide].classList.add('active');
             currentSlide = (currentSlide + 1) % slides.length;
-            setTimeout(showSlide, 4000);
+            setTimeout(showSlide, 3500);
         }
         showSlide();
 
@@ -1053,10 +1083,10 @@
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 6 + 2,
-                    speedX: Math.random() * 4 - 2,
-                    speedY: Math.random() * 4 - 2,
-                    color: ['#f4c430', '#00d4ff', '#ff4d4d'][Math.floor(Math.random() * 3)]
+                    size: Math.random() * 8 + 3,
+                    speedX: Math.random() * 5 - 2.5,
+                    speedY: Math.random() * 5 - 2.5,
+                    color: ['#d4a017', '#ff4d4d', '#ffffff', '#1a2a3b'][Math.floor(Math.random() * 4)]
                 });
             }
             function animate() {
@@ -1087,8 +1117,8 @@
             }
             @keyframes shake {
                 0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
+                25% { transform: translateX(-7px); }
+                75% { transform: translateX(7px); }
             }
         `;
         document.head.appendChild(style);
