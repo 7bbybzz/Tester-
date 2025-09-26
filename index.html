@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RakRunnin Nexus - Stack Racks Beyond Reality</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  <title>RakRunnin Shop - Stack Racks Fast</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,500 +12,390 @@
       box-sizing: border-box;
     }
     body {
-      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a3a 100%);
-      color: #00ffcc;
-      font-family: 'Roboto Mono', monospace;
+      background: #000000;
+      color: #ffffff;
+      font-family: 'Roboto Condensed', sans-serif;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      perspective: 1000px;
     }
-    #captcha-screen {
+    .screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 10000;
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(15px);
-      animation: glitch 2s infinite;
+      transition: transform 0.5s ease, opacity 0.5s ease;
     }
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      2% { transform: translate(2px, -2px); }
-      4% { transform: translate(-2px, 2px); }
-      6% { transform: translate(0); }
+    .screen.active {
+      display: flex;
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .screen.hidden {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    #captcha-screen {
+      background: #1a1a1a;
+      z-index: 1000;
     }
     #captcha-screen h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3em;
-      text-shadow: 0 0 10px #00ffcc, 0 0 20px #ff007a;
+      color: #ff0000;
+      font-size: 2.5em;
       margin-bottom: 20px;
     }
     #captcha-screen input {
-      padding: 15px;
-      border: 2px solid #ff007a;
-      border-radius: 10px;
-      background: rgba(0, 255, 204, 0.1);
-      color: #00ffcc;
+      padding: 12px;
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+      background: #2a2a2a;
+      color: #ffffff;
       font-size: 1.2em;
-      width: 250px;
-      transition: all 0.3s ease;
+      width: 200px;
+      transition: border-color 0.3s;
     }
     #captcha-screen input:focus {
-      border-color: #00ffcc;
-      box-shadow: 0 0 15px #00ffcc;
+      border-color: #ffffff;
       outline: none;
     }
     #captcha-screen button {
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      color: #0d0d0d;
-      padding: 15px 30px;
+      background: #ff0000;
+      color: #000000;
+      padding: 12px 24px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      font-family: 'Orbitron', sans-serif;
       font-size: 1.2em;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, background 0.3s;
     }
     #captcha-screen button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #ff007a;
+      background: #cc0000;
+      transform: scale(1.05);
     }
     #loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.98);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background: #000000;
+      z-index: 999;
+      display: none;
     }
-    #loading-canvas {
-      width: 200px;
-      height: 200px;
+    #loading-screen .loader {
+      width: 100px;
+      height: 100px;
+      border: 10px solid #ff0000;
+      border-top: 10px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     .container {
       display: flex;
       min-height: 100vh;
     }
-    .sidebar {
-      width: 300px;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 20px;
-      position: fixed;
-      height: 100%;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #ff007a #0d0d0d;
-      transform: translateX(-100%);
-      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      z-index: 999;
-    }
-    .sidebar.active {
-      transform: translateX(0);
-      box-shadow: 0 0 30px #00ffcc;
-    }
-    .sidebar h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2em;
-      text-shadow: 0 0 10px #ff007a;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .sidebar ul {
-      list-style: none;
-    }
-    .sidebar li {
-      padding: 15px;
-      margin: 10px 0;
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.2em;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .sidebar li:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #00ffcc;
-    }
-    .sidebar li::before {
-      content: '⚡';
-      margin-right: 10px;
-    }
     .main-content {
-      margin-left: 0;
-      padding: 20px;
       width: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      background: #1a1a1a;
     }
     .header {
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      padding: 20px;
-      border-radius: 15px;
+      background: #ff0000;
+      color: #000000;
+      padding: 15px;
       text-align: center;
+      border-radius: 8px;
       margin-bottom: 20px;
-      box-shadow: 0 0 30px #ff007a;
     }
     .header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5em;
-      text-shadow: 0 0 15px #00ffcc;
-    }
-    .navbar {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 15px;
-      border-radius: 15px;
-      margin: 15px 0;
-    }
-    .navbar button {
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      color: #0d0d0d;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1em;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .navbar button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #00ffcc;
-    }
-    .search-bar {
-      max-width: 500px;
-      margin: 20px auto;
-      position: relative;
-    }
-    .search-bar input {
-      width: 100%;
-      padding: 15px;
-      border: 2px solid #ff007a;
-      border-radius: 10px;
-      background: rgba(0, 255, 204, 0.1);
-      color: #00ffcc;
-      font-size: 1.2em;
-      transition: all 0.3s ease;
-    }
-    .search-bar input:focus {
-      border-color: #00ffcc;
-      box-shadow: 0 0 15px #00ffcc;
-      outline: none;
-    }
-    .search-bar::after {
-      content: '🎙️';
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #ff007a;
-      font-size: 1.5em;
-      cursor: pointer;
+      font-size: 2em;
     }
     .item-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 15px;
     }
     .item {
-      background: rgba(0, 0, 0, 0.9);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #ff007a;
-      transition: transform 0.5s ease;
-      transform-style: preserve-3d;
-      position: relative;
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      transition: transform 0.3s ease;
     }
     .item:hover {
-      transform: rotateY(180deg);
-    }
-    .item .front, .item .back {
-      backface-visibility: hidden;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-    }
-    .item .back {
-      transform: rotateY(180deg);
-      background: linear-gradient(45deg, #00ffcc, #ff007a);
-      color: #0d0d0d;
+      transform: translateY(-5px);
     }
     .item img {
       width: 100%;
-      max-width: 150px;
+      max-width: 120px;
       margin: 0 auto;
       display: block;
-      filter: drop-shadow(0 0 10px #00ffcc);
+      border-radius: 8px;
     }
     .item h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5em;
-      text-shadow: 0 0 10px #ff007a;
-    }
-    .item p {
-      font-size: 1em;
+      color: #ff0000;
+      font-size: 1.4em;
       margin: 10px 0;
     }
+    .item p {
+      font-size: 0.9em;
+      color: #ffffff;
+    }
     .buy-btn {
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      color: #0d0d0d;
-      padding: 15px;
+      background: #ff0000;
+      color: #000000;
+      padding: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2em;
+      font-size: 1em;
       width: 100%;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, background 0.3s;
     }
     .buy-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #00ffcc;
+      background: #cc0000;
+      transform: scale(1.05);
     }
     .cart-icon {
       position: fixed;
       top: 20px;
       right: 20px;
       font-size: 2em;
-      color: #ff007a;
+      color: #ff0000;
       cursor: pointer;
-      z-index: 1000;
       transition: transform 0.3s;
     }
     .cart-icon:hover {
-      transform: rotate(360deg);
-    }
-    .theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      color: #0d0d0d;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1em;
-      transition: transform 0.3s;
-    }
-    .theme-toggle:hover {
       transform: scale(1.1);
     }
-    .popup {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      background: linear-gradient(45deg, #ff007a, #00ffcc);
-      color: #0d0d0d;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #00ffcc;
-      z-index: 1000;
-      animation: glitch 1s infinite;
+    #cart-screen {
+      background: #1a1a1a;
+      z-index: 998;
+    }
+    #cart-screen h2 {
+      color: #ff0000;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .cart-item {
+      background: #2a2a2a;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 80%;
+      max-width: 600px;
+    }
+    .cart-item p {
+      font-size: 1em;
+      color: #ffffff;
+    }
+    .cart-item button {
+      background: #ff0000;
+      color: #000000;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .cart-item button:hover {
+      transform: scale(1.05);
+    }
+    #payment-screen {
+      background: #1a1a1a;
+      z-index: 997;
+    }
+    #payment-screen h2 {
+      color: #ff0000;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .payment-options {
+      display: flex;
+      gap: 20px;
+    }
+    .payment-btn {
+      background: #ff0000;
+      color: #000000;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .payment-btn:hover {
+      background: #cc0000;
+      transform: scale(1.05);
+    }
+    #invoice-screen {
+      background: #1a1a1a;
+      z-index: 996;
+    }
+    #invoice-screen h2 {
+      color: #ff0000;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .invoice {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    .invoice p {
+      font-size: 1em;
+      color: #ffffff;
+      margin: 10px 0;
+    }
+    .invoice .timer {
+      font-size: 1.2em;
+      color: #ff0000;
+      font-weight: bold;
+    }
+    #confirmation-screen {
+      background: #1a1a1a;
+      z-index: 995;
+    }
+    #confirmation-screen h2 {
+      color: #ff0000;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff0000;
+    }
+    .card-reveal {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+      animation: reveal 1s ease;
+    }
+    @keyframes reveal {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .card-reveal p {
+      font-size: 1.2em;
+      color: #ffffff;
+      margin: 10px 0;
+    }
+    .trust-badge {
+      background: #ff0000;
+      color: #000000;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9em;
+      margin: 10px 0;
+      display: inline-block;
     }
   </style>
 </head>
 <body>
-  <div id="captcha-screen">
-    <h2>RakRunnin Nexus - Verify Access</h2>
+  <div id="captcha-screen" class="screen active">
+    <h2>Verify to Stack Racks</h2>
     <p id="captcha-question"></p>
-    <input type="text" id="captcha-input" placeholder="Solve the cipher...">
-    <button onclick="verifyCaptcha()">Enter the Nexus</button>
+    <input type="text" id="captcha-input" placeholder="Solve it...">
+    <button onclick="verifyCaptcha()">Submit</button>
   </div>
 
-  <div id="loading-screen">
-    <canvas id="loading-canvas"></canvas>
-    <p>Stackin’ Racks in Hyperspace...</p>
+  <div id="loading-screen" class="screen">
+    <div class="loader"></div>
+    <p>Processing...</p>
   </div>
 
-  <div class="popup" id="deal-popup">
-    <p>⚡ Stack Racks Now! 75% OFF All Cards! DM @rakrunnin! ⚡</p>
-  </div>
-
-  <div class="container">
-    <div class="cart-icon" onclick="showCart()">🛒</div>
-    <div class="sidebar" id="sidebar">
-      <h3>RakRunnin Nexus</h3>
-      <ul id="sidebar-menu">
-        <li onclick="loadPage('cards')">Credit Cards</li>
-        <li onclick="loadPage('accounts')">Store Accounts</li>
-        <li onclick="loadPage('malware')">Dark Software</li>
-        <li onclick="loadPage('fullz')">Premium Data</li>
-        <li onclick="showAccountSection()">Account</li>
-        <li onclick="showCart()">Cart</li>
-      </ul>
-    </div>
-    <div class="main-content" id="main-content">
-      <div class="header">
-        <h1>RakRunnin Nexus</h1>
-        <p>Stack Racks Beyond Reality - Pay via Crypto - DM @rakrunnin</p>
-      </div>
-      <div class="navbar">
-        <button onclick="filterItems('all', 'cardContainer', 'cards')">All Cards</button>
-        <button onclick="filterItems('Visa', 'cardContainer', 'cards')">Visa</button>
-        <button onclick="filterItems('MasterCard', 'cardContainer', 'cards')">MasterCard</button>
-        <button onclick="filterItems('Discover', 'cardContainer', 'cards')">Discover</button>
-        <button onclick="filterItems('Amex', 'cardContainer', 'cards')">Amex</button>
-        <button onclick="filterItems('Chase', 'cardContainer', 'cards')">Chase</button>
-      </div>
-      <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Search the Nexus..." oninput="searchItems(this.value)">
-      </div>
-      <div class="section" id="cards-section">
-        <h2>Credit Cards</h2>
-        <div class="item-container" id="cardContainer"></div>
-      </div>
-      <div class="section" id="accounts-section" style="display: none;">
-        <h2>Store Accounts</h2>
-        <div class="item-container" id="accountContainer"></div>
-      </div>
-      <div class="section" id="malware-section" style="display: none;">
-        <h2>Dark Software</h2>
-        <div class="item-container" id="malwareContainer"></div>
-      </div>
-      <div class="section" id="fullz-section" style="display: none;">
-        <h2>Premium Data</h2>
-        <div class="item-container" id="fullzContainer"></div>
-      </div>
-      <div class="job-section">
-        <h2>Contact the Nexus</h2>
-        <p>DM @rakrunnin on Telegram to stack racks!</p>
-        <a href="https://t.me/rakrunnin">Enter the Void</a>
+  <div id="main-screen" class="screen">
+    <div class="container">
+      <div class="cart-icon" onclick="showScreen('cart-screen')">🛒</div>
+      <div class="main-content">
+        <div class="header">
+          <h1>RakRunnin Shop</h1>
+          <p>Stack Racks Fast - DM @rakrunnin on Telegram</p>
+        </div>
+        <div class="section">
+          <h2>Credit Cards</h2>
+          <div class="item-container" id="cardContainer"></div>
+        </div>
       </div>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()">Shift Dimension</button>
+  </div>
+
+  <div id="cart-screen" class="screen">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <button class="payment-btn" onclick="showScreen('payment-screen')" id="pay-btn" style="display: none;">Pay Now</button>
+  </div>
+
+  <div id="payment-screen" class="screen">
+    <h2>Choose Payment Method</h2>
+    <div class="payment-options">
+      <button class="payment-btn" onclick="generateInvoice('Cash App')">Cash App</button>
+      <button class="payment-btn" onclick="generateInvoice('Bitcoin')">Bitcoin</button>
+    </div>
+  </div>
+
+  <div id="invoice-screen" class="screen">
+    <h2>Payment Invoice</h2>
+    <div class="invoice">
+      <p id="invoice-details"></p>
+      <p class="timer" id="invoice-timer">Time Left: 10:00</p>
+      <p class="trust-badge">🔒 Secured by RakRunnin</p>
+      <button class="payment-btn" onclick="completePayment()">Payment Completed</button>
+    </div>
+  </div>
+
+  <div id="confirmation-screen" class="screen">
+    <h2>Congrats! Racks Stacked!</h2>
+    <div class="card-reveal">
+      <p id="card-details"></p>
+      <p class="trust-badge">✅ Verified Transaction #<span id="transaction-id"></span></p>
+    </div>
   </div>
 
   <script>
-    // Custom SVG Logos (replacing broken URLs)
-    const logos = {
-      Visa: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">VISA</text></svg>`,
-      MasterCard: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><circle cx="40" cy="30" r="20" fill="#ff007a"/><circle cx="60" cy="30" r="20" fill="#00ffcc"/><text x="50" y="40" font-size="15" fill="#0d0d0d" text-anchor="middle">MC</text></svg>`,
-      Discover: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">DISC</text></svg>`,
-      Amex: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">AMEX</text></svg>`,
-      Chase: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">CHASE</text></svg>`,
-      Saks: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">SAKS</text></svg>`,
-      Nordstrom: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">NORD</text></svg>`,
-      Walmart: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">WAL</text></svg>`,
-      Macys: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><text x="50" y="40" font-size="20" fill="#00ffcc" text-anchor="middle">MACY</text></svg>`,
-      Software: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><path d="M20 20 L80 20 L80 40 L20 40 Z" fill="#ff007a"/><text x="50" y="35" font-size="15" fill="#0d0d0d" text-anchor="middle">CODE</text></svg>`,
-      User: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#1a1a3a"/><circle cx="50" cy="30" r="20" fill="#00ffcc"/><text x="50" y="35" font-size="15" fill="#0d0d0d" text-anchor="middle">USER</text></svg>`
-    };
-
-    // Data
     const cardData = [
-      { type: 'Visa', bin: '414720', logo: logos.Visa, use: 'Shop online or cash out at ATMs.', balance: 5000, successRate: 95 },
-      { type: 'MasterCard', bin: '555555', logo: logos.MasterCard, use: 'Ideal for subscriptions or purchases.', balance: 7000, successRate: 90 },
-      { type: 'Discover', bin: '601111', logo: logos.Discover, use: 'Great for online stores.', balance: 3000, successRate: 85 },
-      { type: 'Amex', bin: '378282', logo: logos.Amex, use: 'Luxury purchases or cashouts.', balance: 10000, successRate: 92 },
-      { type: 'Chase', bin: '426684', logo: logos.Chase, use: 'Premium card for cashouts.', balance: 8000, successRate: 93 }
-    ];
-    const accountData = [
-      { type: 'Saks Account', bin: 'SAKS', logo: logos.Saks, use: 'Buy luxury goods at Saks.', balance: 2000, successRate: 88 },
-      { type: 'Nordstrom Gift Card', bin: 'NORD', logo: logos.Nordstrom, use: 'Shop fashion at Nordstrom.', balance: 1500, successRate: 87 },
-      { type: 'Walmart Gift Card', bin: 'WAL', logo: logos.Walmart, use: 'Purchase electronics or groceries.', balance: 1000, successRate: 85 },
-      { type: 'Macy’s Account', bin: 'MACY', logo: logos.Macys, use: 'Shop at Macy’s for clothes.', balance: 2500, successRate: 89 }
-    ];
-    const malwareData = [
-      { type: 'Secure Keylogger', bin: 'KEY', logo: logos.Software, use: 'Capture data silently.', balance: 0, successRate: 90 },
-      { type: 'Access Tool X', bin: 'TROJ', logo: logos.Software, use: 'Remote access and data capture.', balance: 0, successRate: 92 },
-      { type: 'Control Suite Z', bin: 'RATZ', logo: logos.Software, use: 'Steal files and control devices.', balance: 0, successRate: 95 }
-    ];
-    const fullzData = [
-      { type: 'Premium Data - John Doe', bin: 'FULL1', logo: logos.User, use: 'Open bank accounts or loans.', balance: 0, successRate: 90 },
-      { type: 'Premium Data - Jane Smith', bin: 'FULL2', logo: logos.User, use: 'Use for credit applications.', balance: 0, successRate: 88 },
-      { type: 'Premium Data - Mike Brown', bin: 'FULL3', logo: logos.User, use: 'High-value applications.', balance: 0, successRate: 92 }
+      { type: 'Visa', bin: '414720', logo: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60"><rect width="100" height="60" fill="#ff0000"/><text x="50" y="40" font-size="20" fill="#000000" text-anchor="middle">VISA</text></svg>', use: 'Shop online or cash out.', balance: 5000, successRate: 95 }
     ];
 
-    // WebGL Loading Animation
-    function initLoadingAnimation() {
-      const canvas = document.getElementById('loading-canvas');
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-      renderer.setSize(canvas.width, canvas.height);
-      const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-      const material = new THREE.MeshBasicMaterial({ color: 0xff007a, wireframe: true });
-      const torusKnot = new THREE.Mesh(geometry, material);
-      scene.add(torusKnot);
-      camera.position.z = 30;
-      function animate() {
-        requestAnimationFrame(animate);
-        torusKnot.rotation.x += 0.01;
-        torusKnot.rotation.y += 0.01;
-        renderer.render(scene, camera);
-      }
-      animate();
-    }
-
-    // Voice Search
-    function initVoiceSearch() {
-      const searchInput = document.getElementById('search-input');
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        searchInput.value = transcript;
-        searchItems(transcript);
-      };
-      document.querySelector('.search-bar').addEventListener('click', () => recognition.start());
-    }
-
-    // GSAP Animations
-    function animateItems() {
-      gsap.from('.item', {
-        opacity: 0,
-        y: 100,
-        stagger: 0.1,
-        duration: 1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.item-container',
-          start: 'top 80%'
-        }
-      });
-    }
-
-    // Core Functions (Updated from Original)
     function generateCaptcha() {
-      const operations = ['+', '-', '*'];
-      const op = operations[Math.floor(Math.random() * operations.length)];
       const num1 = Math.floor(Math.random() * 20) + 1;
-      let num2 = Math.floor(Math.random() * 20) + 1;
-      if (op === '-') num2 = Math.min(num2, num1);
-      if (op === '*') num2 = Math.floor(Math.random() * 10) + 1;
-      const question = `What is ${num1} ${op} ${num2}?`;
-      let answer = op === '+' ? num1 + num2 : op === '-' ? num1 - num2 : num1 * num2;
-      return { question, answer: answer.toString() };
+      const num2 = Math.floor(Math.random() * 20) + 1;
+      const question = `What is ${num1} + ${num2}?`;
+      return { question, answer: (num1 + num2).toString() };
     }
 
     let currentCaptcha = generateCaptcha();
 
-    function addToCart(item) {
-      const username = localStorage.getItem('currentUser');
-      if (!username) {
-        alert('Access the Nexus to stack racks.');
-        showAccountSection();
-        return;
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+        screen.classList.add('hidden');
+      });
+      const targetScreen = document.getElementById(screenId);
+      targetScreen.classList.remove('hidden');
+      targetScreen.classList.add('active');
+      if (screenId === 'cart-screen') displayCart();
+      if (screenId !== 'loading-screen') {
+        setTimeout(() => {
+          document.getElementById('loading-screen').classList.remove('active');
+          document.getElementById('loading-screen').classList.add('hidden');
+        }, 1000);
       }
+    }
+
+    function addToCart(item) {
+      const username = localStorage.getItem('currentUser') || 'guest';
       const users = JSON.parse(localStorage.getItem('users') || '{}');
+      if (!users[username]) users[username] = { cart: [] };
       users[username].cart = users[username].cart || [];
       users[username].cart.push({
         cardType: item.cardType,
@@ -517,59 +404,153 @@
         successRate: item.successRate
       });
       localStorage.setItem('users', JSON.stringify(users));
-      showPopup(`Added ${item.cardType} to the Nexus! DM @rakrunnin! ⚡`);
-      gsap.to('.cart-icon', { scale: 1.5, duration: 0.3, yoyo: true, repeat: 1 });
+      alert(`${item.cardType} added to cart!`);
     }
 
-    function displayItems(filter = 'all', containerId = 'cardContainer', category = 'cards') {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      const items = Array(1000).fill().map(() => generateItem(category));
-      let filteredItems = filter === 'all' ? items : items.filter(item => item.cardType === filter);
-      filteredItems.slice(0, 50).forEach(item => addItem(item, container));
-      animateItems();
-      updateSidebar();
+    function displayCart() {
+      const username = localStorage.getItem('currentUser') || 'guest';
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = '';
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      const cart = users[username]?.cart || [];
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p>Cart is empty. Stack some racks!</p>';
+        document.getElementById('pay-btn').style.display = 'none';
+        return;
+      }
+      cart.forEach((item, index) => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <p>${item.cardType} - $${item.price} (Balance: $${item.balance})</p>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItems.appendChild(cartItem);
+      });
+      document.getElementById('pay-btn').style.display = 'block';
     }
 
-    function addItem(item, container) {
-      const reviewsId = `reviews-${item.cardType}-${item.cardNumber.replace(/-/g, '')}`;
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'item';
-      itemDiv.innerHTML = `
-        <div class="front">
-          ${item.soldOut ? '<p class="sold-out">SOLD OUT</p>' : `
-            <img src="${item.logo}" alt="${item.cardType}">
-          `}
-          <h3>${item.cardType} - $${item.price}</h3>
-          <p>ID: ${item.cardNumber.slice(0, 6)}XXXX</p>
-          ${item.balance ? `<p>Balance: $${item.balance}</p>` : ''}
-          <p>Success Rate: ${item.successRate}%</p>
-          <button class="buy-btn" ${item.soldOut ? 'disabled' : ''} onclick="addToCart(${JSON.stringify(item)})">Stack Racks</button>
-        </div>
-        <div class="back">
-          <p>${item.use}</p>
-          <p class="stars">${'★'.repeat(Math.floor(item.reviews[0].rating))}${item.reviews[0].rating % 1 ? '☆' : ''} ${item.reviews[0].rating.toFixed(1)}/5</p>
-          <button class="reviews-btn" onclick="toggleReviews('${reviewsId}')">Reviews</button>
-          <div class="reviews-container" id="${reviewsId}">
-            ${item.reviews.map(review => `
-              <p class="comment">
-                <span class="username">${review.username}</span>
-                <span class="confirmed-badge">Verified</span>: ${review.comment}
-              </p>
-            `).join('')}
-          </div>
-        </div>
+    function removeFromCart(index) {
+      const username = localStorage.getItem('currentUser') || 'guest';
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      if (users[username]?.cart) {
+        users[username].cart.splice(index, 1);
+        localStorage.setItem('users', JSON.stringify(users));
+        displayCart();
+      }
+    }
+
+    function generateInvoice(method) {
+      const username = localStorage.getItem('currentUser') || 'guest';
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      const cart = users[username]?.cart || [];
+      if (cart.length === 0) {
+        alert('Cart is empty!');
+        return;
+      }
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const btcAddress = 'bc1' + Array(39).fill().map(() => 'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random() * 36)]).join('');
+      const transactionId = Math.random().toString(36).substring(2, 10).toUpperCase();
+      const invoiceDetails = `
+        Payment Method: ${method}<br>
+        Total: $${total}<br>
+        ${method === 'Bitcoin' ? `BTC Address: ${btcAddress}` : 'Cash App: $RakRunnin'}<br>
+        Transaction ID: ${transactionId}
       `;
-      container.appendChild(itemDiv);
+      document.getElementById('invoice-details').innerHTML = invoiceDetails;
+      startTimer();
+      showScreen('invoice-screen');
     }
 
-    // Initialize
+    function startTimer() {
+      let timeLeft = 600; // 10 minutes in seconds
+      const timerDisplay = document.getElementById('invoice-timer');
+      const timer = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        timeLeft--;
+        if (timeLeft < 0) {
+          clearInterval(timer);
+          alert('Payment timed out!');
+          showScreen('main-screen');
+        }
+      }, 1000);
+      window.paymentTimer = timer;
+    }
+
+    function completePayment() {
+      clearInterval(window.paymentTimer);
+      document.getElementById('loading-screen').classList.remove('hidden');
+      document.getElementById('loading-screen').classList.add('active');
+      setTimeout(() => {
+        const cardNumber = Array(16).fill().map(() => Math.floor(Math.random() * 10)).join('').match(/.{1,4}/g).join('-');
+        const cvv = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+        const expiry = `0${Math.floor(Math.random() * 12) + 1}/${Math.floor(Math.random() * 5) + 25}`;
+        const transactionId = Math.random().toString(36).substring(2, 10).toUpperCase();
+        document.getElementById('card-details').innerHTML = `
+          Card Number: ${cardNumber}<br>
+          CVV: ${cvv}<br>
+          Expiry: ${expiry}
+        `;
+        document.getElementById('transaction-id').textContent = transactionId;
+        showScreen('confirmation-screen');
+        const username = localStorage.getItem('currentUser') || 'guest';
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        users[username].cart = [];
+        localStorage.setItem('users', JSON.stringify(users));
+      }, 2000);
+    }
+
+    function generateItem() {
+      const item = cardData[0]; // Simplified for example
+      const price = Math.floor(Math.random() * 491 + 10);
+      const balance = Math.floor(Math.random() * 9501 + 500);
+      return {
+        cardNumber: item.bin + Array(10).fill().map(() => Math.floor(Math.random() * 10)).join(''),
+        cardType: item.type,
+        logo: item.logo,
+        price,
+        use: item.use,
+        balance,
+        successRate: item.successRate,
+        category: 'cards'
+      };
+    }
+
+    function displayItems() {
+      const container = document.getElementById('cardContainer');
+      container.innerHTML = '';
+      const items = Array(10).fill().map(() => generateItem());
+      items.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        itemDiv.innerHTML = `
+          <img src="${item.logo}" alt="${item.cardType}">
+          <h3>${item.cardType} - $${item.price}</h3>
+          <p>Balance: $${item.balance}</p>
+          <p>Success Rate: ${item.successRate}%</p>
+          <button class="buy-btn" onclick="addToCart(${JSON.stringify(item)})">Add to Cart</button>
+        `;
+        container.appendChild(itemDiv);
+      });
+    }
+
+    function verifyCaptcha() {
+      const input = document.getElementById('captcha-input').value.trim();
+      if (input === currentCaptcha.answer) {
+        showScreen('main-screen');
+        displayItems();
+      } else {
+        alert('Wrong answer. Try again.');
+        currentCaptcha = generateCaptcha();
+        document.getElementById('captcha-question').textContent = currentCaptcha.question;
+        document.getElementById('captcha-input').value = '';
+      }
+    }
+
     window.onload = () => {
-      initLoadingAnimation();
-      initVoiceSearch();
       document.getElementById('captcha-question').textContent = currentCaptcha.question;
-      displayItems('all', 'cardContainer', 'cards');
-      setInterval(() => showPopup('⚡ Stack Racks Fast! DM @rakrunnin! ⚡'), 8000);
     };
   </script>
 </body>
